@@ -1,0 +1,33 @@
+ <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Historial</h4>
+              </div>
+              <div class="modal-body">
+               
+               	<div class="input-group">
+		   <typeahead items="items" prompt="Ingrese Nombre..." title="name" subtitle="abbreviation" nombreItem="nombreItem" codigo="idEmail" model="nombre" on-select="seleccionarUsuario()" />
+
+		
+		
+		</div>
+		
+				<label class="select">
+                            <select class="input-sm estilo-input" ng-model="rolEquipo" name="rolEquipo" ng-options="item as item.nombre  for item in listas.rolEquipo track by item.id">
+                                 <option value="">-- Seleccione Rol --</option>
+                                
+                            </select>
+                        
+                        </label>
+               
+               
+              </div>
+              <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              
+              </div>
+            </div>
+          </div>
+        </div>

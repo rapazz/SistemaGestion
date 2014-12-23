@@ -1,0 +1,50 @@
+
+
+<section class="panel panel-default">
+    <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Editar Tipo</strong></div>
+    <div class="panel-body">
+
+        <div ng-show="esgrabado" ng-model="esgrabado" id="divid" class="alert alert-success fade in">
+            <button class="close" ng-click="CerrarGrabado()"  >
+                ×
+            </button>
+            <i class="fa-fw fa fa-check"></i>
+          <strong>Se ha grabado con éxito</strong>
+        </div>
+
+        <form enctype="multipart/form-data" class="form-horizontal ng-pristine ng-valid">
+            <input type="hidden" name="tipoincidente.TipoIncidenteId" ng-model="tipoincidente.TipoIncidenteId" >
+            <div class="form-group">
+                <label for="" class="col-sm-2">Código</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">{{id}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2">Fecha de Creación</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">{{tipoincidente.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control"  ng-model="tipoincidente.Nombre"  name="tipoincidente.Nombre" placeholder="Nombre"  >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="" class="col-sm-2">Es Activo?</label>
+                <div class="col-sm-10">
+                  <input type="checkbox" class="form-control"  ng-model="tipoincidente.EsActivo"  name="tipoincidente.EsActivo" ng-checked="tipoincidente.EsActivo == 1 || tipoincidente.EsActivo" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-10 col-sm-offset-2">
+                  <button type="button" class="btn btn-w-md btn-gap-v btn-default" onclick="window.history.back()">Volver</button>
+
+                  <button type="button" class="btn btn-w-md btn-gap-v btn-success"  ng-click="GrabarDato()" >Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>

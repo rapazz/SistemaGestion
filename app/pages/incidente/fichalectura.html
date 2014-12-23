@@ -1,0 +1,225 @@
+
+
+<style>
+  .content-btn{
+    padding: 10px;
+  }
+</style>
+
+
+
+
+<div class="row ng-scope">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+
+      <!-- PAGE HEADER -->
+      <i class="fa-fw fa fa-pencil-square-o"></i>
+      Incidente
+			<span>&gt;
+			Ver Incidente
+			</span>
+    </h1>
+  </div>
+</div>
+
+
+<div class="col-sm-12 content-btn">
+  <button type="button" onclick="window.history.back()" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
+
+
+</div>
+<section class="panel panel-default">
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Ver Incidente</strong></div>
+  <div class="panel-body">
+
+    <form enctype="multipart/form-data" name="formEditarIncidente" id="formEditarIncidente" class="form-horizontal ng-pristine ng-valid">
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Nº Incidente</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{{incidente.incidente.IncidenteId}}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Fecha Creación</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">{{incidente.incidente.FechaCreacion | date:'MM/dd/yyyy h:mma' }}</p>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Estado (Interno)</label>
+        <div class="col-sm-10">
+          <p class="form-control-static">  {{incidente.incidente.Estado}}</p>
+        </div>
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Título</label>
+        <div class="col-sm-10 col-md-4">
+          <p class="form-control-static" >{{ incidente.incidente.Asunto }}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Descripción</label>
+        <div class="col-sm-10 col-md-4">
+          <p class="form-control-static"  >{{incidente.incidente.TextoOriginal}}</p>
+
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Tipo problema</label>
+
+        <div class="col-sm-10">
+										<span class="ui-select">
+
+    <div ng-repeat="item in incidente.tipo | filter: { TipoIncidenteId:  incidente.incidente.TipoIncidenteId }:true">{{item.Nombre}}</div>
+
+										</span>									</div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Módulo</label>
+
+        <div class="col-sm-10">
+										<span class="ui-select">
+
+   <div ng-repeat="item in incidente.subtipo  | filter: { SubTipoIncidenteId:   incidente.incidente.SubTipoIncidenteId }:true">{{item.Nombre}}</div>
+
+   								 							</span>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Origen del Problema</label>
+
+        <div class="col-sm-10">
+										<span class="ui-select">
+
+                      <div ng-repeat="item in incidente.origen  | filter: { OrigenProblemaId:   incidente.incidente.OrigenProblemaId }:true">{{item.Nombre}}</div>
+
+
+										</span>									</div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Código termino</label>
+
+        <div class="col-sm-10">
+										<span class="ui-select">
+
+    <div ng-repeat="item in incidente.codigo  | filter: { CodigoTerminoId:   incidente.incidente.CodigoTerminoId }:true">{{item.Nombre}:true}</div>
+
+
+										</span>									</div>
+      </div>
+
+
+
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Usuario Key User asignado</label>
+
+        <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.UsuarioIdUltimoAsignado}}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Usuario consultor asignado</label>
+
+        <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.UsuarioIdConsultor}}</p>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Estado General</label>
+        <div class="col-sm-4">
+          <table  border="0" cellspacing="0" cellpadding="0">
+            <tbody><tr>
+
+              <td><strong ng-show="incidente.incidente.EstadoGeneral == 1">Abierto</strong>
+                <strong ng-show="incidente.incidente.EstadoGeneral == 0">Abierto</strong>
+              </td>
+
+            </tr>
+            </tbody></table>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="" class="col-sm-2 control-label">Adjuntos</label>
+        <div class="col-sm-10">
+          <ul class="list-adjuntos" ng-repeat="archivo in incidente.adjunto">
+            <li ><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a>, creado el {{archivo.FechaCreacion | date:'dd/MM/yyyy h:mma'}}</li>
+
+          </ul>
+          <div ng-show="incidente.adjunto.length == 0">Sin archivos subidos</div>
+        </div>
+      </div>
+
+
+      <div class="form-group" ng-show="incidente.incidente.EstadoGeneral == 0">
+        <label for="" class="col-sm-2">Proveedor</label>
+        <div class="col-sm-10 col-md-4">
+          <input type="text" class="form-control" name="proveedor" ng-model="incidente.incidente.EmailProveedor" placeholder="email del proveedor">
+        </div>
+      </div>
+
+
+
+
+      <div class="col-md-12">
+        <h3>Tabla de eventos</h3>
+        <table ng-repeat="hist in incidente.historial" class="table table-bordered">
+          <tbody>
+          <tr>
+            <th width="20%">Número</th>
+            <td>{{hist.IncidenteHistorialId}}</td>
+          </tr>
+          <tr>
+            <th>Fecha</th>
+            <td>{{hist.FechaEvento | date:'MM/dd/yyyy h:mma'}}</td>
+          </tr>
+          <tr>
+            <th>Estado</th>
+            <td><span ng-repeat="item in incidente.estado | filter:{EstadoId:hist.Estado}">({{item.EstadoId}}) {{item.Nombre}}</span></td>
+          </tr>
+          <tr>
+            <th>Texto</th>
+            <td>{{hist.Observacion}}</td>
+          </tr>
+          <tr>
+            <th>Usuario</th>
+            <td>{{hist.UsuarioId}} </td>
+          </tr>
+
+
+
+          <tr>
+            <th>Código Término</th>
+            <td><span ng-repeat="item in incidente.codigo | filter:{CodigoTerminoId:hist.CodigoTerminoId}">{{item.Nombre}}</span> </td>
+          </tr>
+
+
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+
+
+
+    </form>
+
+
+  </div>
+</section>
+<br><br>      <br><br>      <br><br>

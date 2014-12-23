@@ -1,0 +1,179 @@
+
+
+<style>
+  .content-btn{
+    padding: 10px;
+  }
+</style>
+
+
+<div class="row ng-scope">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+
+      <!-- PAGE HEADER -->
+      <i class="fa-fw fa fa-pencil-square-o"></i>
+      Incidente
+			<span>&gt;
+			Crear Incidente
+			</span>
+    </h1>
+  </div>
+</div>
+
+<div class="row ng-scope">
+  <div class="col-md-12">
+    <section class="panel panel-default">
+      <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Creación Incidente</strong></div>
+      <div class="panel-body">
+
+        <div class="alert alert-block alert-danger" ng-show="!paginaValida">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
+          <p>
+            Se han encontrado errores o falta de información, por favor verifique
+          </p>
+        </div>
+
+   <form enctype="multipart/form-data" name="formCrearIncidente"
+         id="formCrearIncidente" ng-submit="GrabarIncidente()"
+         class="ng-pristine ng-valid form-horizontal" novalidate="novalidate"  method="POST">
+  <fieldset>
+
+    <div class="form-group" >
+      <div class="col-md-12" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.asunto.$error.required}">
+     <label for="" class="col-sm-2 control-label">Título</label>
+
+        <div class="col-sm-10">
+              <input type="text" class="form-control" ng-model="incidente.Asunto" name="asunto"  required  placeholder="Título descriptivo del problema">
+
+          <p ng-show="!paginaValida && formCrearIncidente.asunto.$invalid" class="help-block">Debe ingresar el "título del problema"</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-group"  >
+      <div class="col-md-6" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.tiposistema.$error.required}">
+
+     <label for="" class="col-sm-4 control-label">Tipo de Sistema</label>
+
+        <div class="col-sm-8">
+
+
+
+       <select class="form-control" ng-model="incidente.TipoIncidenteId"    required   name="tiposistema"   ng-options="item.TipoIncidenteId as item.Nombre  for item in Tipos">
+         <option value="">Seleccione un valor</option>
+
+       </select>
+
+          <p ng-show="!paginaValida  && formCrearIncidente.tiposistema.$error.required" class="help-block">Debe indicar el "Tipo del Sistema"</p>
+
+								</div>
+
+    </div>
+
+
+
+      <div  class="col col-md-6" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.modulo.$error.required}">
+
+        <label for="" class="col-sm-4 control-label">Módulo de Sistema</label>
+
+
+
+<div class="col-sm-8"  >
+
+       <select  ng-model="incidente.SubTipoIncidenteId" name="modulo" required class="form-control"
+
+
+                ng-options="item.SubTipoIncidenteId as item.Nombre for item in SubTipos | filter: { TipoIncidenteId:  incidente.TipoIncidenteId }:true" >
+         <option value="">Seleccione un valor</option>
+
+
+       </select>
+
+  <p ng-show="!paginaValida && formCrearIncidente.modulo.$error.required" class="help-block">Debe ingresar el "Módulo del Sistema"</p>
+</div>
+
+
+
+      </div>
+
+    </div>
+
+    <div class="form-group" >
+      <div class="col-md-12"  ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.textooriginal.$error.required}">
+
+          <label for="" class="col-sm-2 control-label">Descripción</label>
+
+        <div class="col-sm-10">
+
+          <textarea rows="3" class="form-control"  required ng-model="incidente.TextoOriginal"  name="textooriginal"     placeholder="Descripción del problema"></textarea>
+
+          <p ng-show="!paginaValida && formCrearIncidente.textooriginal.$error.required" class="help-block">Debe ingresar la "descripción del problema"</p>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-10 col-sm-offset-2">
+      <div class="panel panel-default">
+
+       <div class="panel panel-default">
+           <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Adjuntos</strong></div>
+           <div class="panel-body">
+               <div class="form-group">
+
+
+
+                   <div class="col-sm-2">
+                       <input type="file" title="Choose File" name="archivo" ng-file-select="onFileSelect($files)"    data-ui-file-upload class="btn btn-primary">
+                            </div>
+               </div>
+           </div>
+
+
+
+           <div class="table-responsive">
+               <table class="table table-striped table-bordered">
+                   <thead>
+                   <tr>
+                       <th>Nombre Adjunto</th>
+                       <th>Fecha</th>
+                       <th>Opciones</th>
+
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr ng-repeat="archivo in Adjuntos">
+                       <td><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a></td>
+                       <td>{{archivo.FechaCreacion}}</td>
+                       <td><span ng-click="EliminarArchivo(archivo.AdjuntoId)" class="glyphicon glyphicon-trash"></span></td>
+                   </tr>
+
+                   </tbody>
+               </table>
+           </div>
+
+       </div>
+</div>
+      </div>
+    <div class="col-md-12 pull-right">
+
+      <button type="button" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
+
+      <button type="button"   class="btn btn-primary"  ng-click="GrabarIncidente()" >Enviar</button>
+
+      </div>
+
+
+</fieldset>
+
+
+   </form>
+
+      </div>
+    </section>
+  </div>
+</div>

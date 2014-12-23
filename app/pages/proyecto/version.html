@@ -1,0 +1,307 @@
+         <div class="modal fade">
+            
+
+ 
+             
+          <div class="modal-dialog modal-body2">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Version</h4>
+              </div>
+              <div class="modal-body modal-body2 ">
+
+<!-- Contenido --> 
+ <form ng-submit="" class="form-horizontal"  role="form" name="formulario" novalidate>
+<section id="widget-grid" class="">
+	<div class="well">
+	
+	
+		              
+
+
+		
+	   <div class="row">
+	       
+<h1 class="text-center">Revision de Documento N° {{proyecto.idProyecto}}</h1>
+	       
+	       
+	   </div>
+<br><br>
+
+
+<div class="row ">
+		<div class="col-md-10 estilo-col-cabecera">
+			Informacion General del Proyecto
+		</div>
+	
+	</div>	   	   
+<div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+		Fecha de Solicitud
+		</div>
+		<div class="col-md-8 estilo-col">
+		{{proyecto.fechaCreacion | date:'dd-MM-yyyy'}}
+		</div>
+	</div>	 
+<div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+	Nombre del Solicitante
+		</div>
+		<div class="col-md-8 estilo-col">
+			{{proyecto.usuario.nombre}}
+		</div>
+	</div>
+<div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+	Nombre del Proyecto
+		</div>
+		<div class="col-md-8 estilo-col">
+		    	{{proyecto.nombre}}
+		</div>
+	</div>
+<div class="row ">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Empresa 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.empresa.nombre}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Departamento 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.departamento.nombre}}
+		</div>
+	</div>
+<div class="row">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Etapa 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.etapa.nombre}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Estado 
+		</div>
+		<div class="col-md-3 estilo-col">
+		{{proyecto.estadoProyecto.nombre}}
+		</div>
+	</div>
+<div class="row">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Bussines Partner 
+		</div>
+		<div class="col-md-3 estilo-col">
+		{{proyecto.usuarioBp.nombre}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Jefe Proyecto 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.jefeProyecto.nombre}}
+		</div>
+	</div>
+<br>
+<br>
+
+<div class="row ">
+		<div class="col-md-10  estilo-col-titulo ">
+		Resumen Ejecutivo
+		</div>
+	
+</div>	   	   
+<div class="row ">
+	<div class="col-md-10 estilo-col">
+	    	{{proyecto.resumenEjecutivo}}
+	
+		</div>
+</div>	
+<br></br>	
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+		<div class="col-md-10  estilo-col-cabecera">
+	Especificación del Proyecto
+		</div>
+	
+</div>	
+
+<div class="row" ng-hide="proyecto.idEtapaProyecto==1">
+	<div class="col-md-2 estilo-col-titulo">
+		Fecha Comienzo 	
+		</div>
+	<div class="col-md-3 estilo-col">
+	    	{{proyecto.fechaEstimadaComienzo}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo">
+		Duracion  en Semanas
+		</div>
+	<div class="col-md-3 estilo-col">
+	    	{{proyecto.duracionSemana}}
+		</div>	
+</div>	
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+	<div class="col-md-2 estilo-col-titulo">
+	Tipo de Proyecto
+		</div>
+	<div class="col-md-3 estilo-col-input">
+			<div  class="inline-group">
+			    
+								
+										<label class="checkbox estilo-input checkbox-inline" ng-repeat="item in tipoProyecto" >
+											<input type="checkbox" name="tipoProyecto" id="tipoProyecto" checklist-model="proyecto.tipoProyecto" checklist-value="item.id" disabled>
+											<i></i>{{item.nombre}}</label>
+	
+				
+			</div>
+		</div>
+		<div class="col-md-2 estilo-col-titulo">
+	Complejidad de Proyecto
+		</div>
+	<div class="col-md-3 estilo-col">
+
+	{{proyecto.complejidad.nombre}}
+
+</div>
+</div>
+	
+	<br></br>	
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+		<div class="col-md-10  estilo-col-cabecera">
+Equipo de Proyecto
+		</div>
+	
+</div>
+<div class="row" ng-show ="arrEquipo.length>0 ">
+		<div class="col-md-4  estilo-col-titulo">
+Nombre 
+		</div>
+
+		<div class="col-md-2  estilo-col-titulo">
+Rol 
+		</div>
+		<div class="col-md-2  estilo-col-titulo">
+Email  
+		</div>
+				<div class="col-md-2  estilo-col-titulo">
+Estado  
+		</div>
+
+</div>	
+<div class="row " ng-repeat="item in arrEquipo" >
+		<div class="col-md-4  estilo-col">
+{{item.nombre}}
+		</div>
+
+		<div class="col-md-2  estilo-col">
+{{item.cargo.nombre}} 
+		</div>
+		<div class="col-md-2  estilo-col">
+{{item.email}}  
+		</div>
+				<div class="col-md-2  estilo-col">
+{{estadoAprobacion(item.estadoAutorizacion)}}  
+		</div>
+</div>	
+
+<br></br>	
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+		<div class="col-md-10  estilo-col-cabecera">
+Evaluacion Economica del Proyecto
+		</div>
+	
+</div>	
+
+<div class="row" ng-hide="proyecto.idEtapaProyecto==1">
+	<div class="col-md-2 estilo-col-titulo">
+	Costos One -off
+		</div>
+	<div class="col-md-3 estilo-col">
+	    {{proyecto.costoOneOff}}
+	
+	</div>
+		<div class="col-md-2 estilo-col-titulo">
+		Costos On Going
+		</div>
+	<div class="col-md-3 estilo-col">
+	     {{proyecto.costoOnGoing}}
+		
+		</div>	
+</div>	
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+	<div class="col-md-2 estilo-col-titulo">
+	Beneficios
+		</div>
+	<div class="col-md-8 estilo-col">
+	     {{proyecto.beneficios}}
+	
+		</div>
+	
+</div>		
+<div class="row " ng-hide="proyecto.idEtapaProyecto==1">
+	<div class="col-md-2 estilo-col-titulo">
+	Beneficios Intangibles
+		</div>
+	<div class="col-md-8 estilo-col">
+	    {{proyecto.beneficioIntangible}}
+	</div> 
+	
+</div>		
+	<br></br>	
+
+
+	<br></br>	
+<div class="row" ng-hide="proyecto.idEtapaProyecto==1">
+		<div class="col-md-10  estilo-col-cabecera">
+Adjuntos
+		</div>
+	
+</div>
+
+<div class="row" ng-hide="proyecto.idEtapaProyecto==1">
+		<div class="col-md-4  estilo-col-titulo">
+Descripcion 
+		</div>
+<div class="col-md-2  estilo-col-titulo">
+Tipo Adjunto 
+</div>
+		<div class="col-md-2  estilo-col-titulo">
+Fecha Creacion 
+		</div>
+		
+
+	
+</div>
+<div class="row" ng-repeat="item in arrAdjuntos">
+		<div class="col-md-4  estilo-col">
+<a href="api/proyectoAdjunto/{{item.urlArchivo}}" target="_blank"> {{item.descripcion}}</a> 
+		</div>
+
+		<div class="col-md-2  estilo-col">
+{{item.tipoAdjunto.nombre}} 
+		</div>
+			<div class="col-md-2  estilo-col">
+{{item.fechaCreacion | date:'dd-MM-yyyy'}} 
+		</div>
+	
+</div>		
+
+	<br></br>	
+
+	
+	
+	
+</div>
+
+
+	  
+</section>
+</form>
+  </div>
+              <div class="modal-footer">
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+

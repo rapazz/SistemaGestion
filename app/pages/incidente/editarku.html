@@ -1,0 +1,220 @@
+
+
+
+<div class="row ng-scope">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+
+      <!-- PAGE HEADER -->
+      <i class="fa-fw fa fa-pencil-square-o"></i>
+      Incidente
+			<span>&gt;
+			Editar Incidente
+			</span>
+    </h1>
+  </div>
+</div>
+<div class="row">
+
+  <div class="col-md-12">
+ <section class="panel panel-default">
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Edición Incidente</strong></div>
+  <div class="panel-body">
+
+   <form enctype="multipart/form-data" name="formEditarIncidente" id="formEditarIncidente" class="form-horizontal ng-pristine ng-valid">
+    <div class="form-group">
+     <label for="" class="col-sm-2">Nº Incidente</label>
+     <div class="col-sm-10">
+      <p class="form-control-static">{{incidente.incidente.IncidenteId}}</p>
+     </div>
+    </div>
+       <div class="form-group">
+           <label for="" class="col-sm-2">Fecha Creación</label>
+           <div class="col-sm-10">
+               <p class="form-control-static">{{incidente.incidente.FechaCreacion | date:'MM/dd/yyyy h:mma' }}</p>
+           </div>
+       </div>
+
+
+       <div class="form-group">
+           <label for="" class="col-sm-2">Estado (Interno)</label>
+           <div class="col-sm-10">
+               <p class="form-control-static">  {{incidente.incidente.Estado}}</p>
+           </div>
+       </div>
+
+
+
+
+    <div class="form-group">
+     <label for="" class="col-sm-2">Título</label>
+     <div class="col-sm-10 col-md-4">
+      <p class="form-control-static">{{incidente.incidente.Asunto}}</p>
+     </div>
+    </div>
+    <div class="form-group">
+     <label for="" class="col-sm-2">Descripción</label>
+     <div class="col-sm-10 col-md-4">
+       <p class="form-control-static">{{incidente.incidente.TextoOriginal}}</p>
+     </div>
+    </div>
+
+
+       <div class="form-group">
+           <label for="" class="col-sm-2">Tipo problema</label>
+
+           <div class="col-sm-10">
+										<span class="ui-select">
+
+
+                      <div ng-repeat="item in incidente.tipo | filter: { TipoIncidenteId:  incidente.incidente.TipoIncidenteId }">{{item.Nombre}}</div>
+
+
+           </div>
+       </div>
+
+       <div class="form-group">
+           <label for="" class="col-sm-2">Módulo</label>
+
+           <div class="col-sm-10">
+										<span class="ui-select">
+
+
+<div ng-repeat="item in incidente.subtipo  | filter: { SubTipoIncidenteId:   incidente.incidente.SubTipoIncidenteId }:true">{{item.Nombre}}</div>
+
+
+									 							</span>
+       </div>
+
+</div>
+       <div class="form-group">
+           <label for="" class="col-sm-2">Origen del Problema</label>
+
+           <div class="col-sm-10">
+
+												<span class="ui-select">
+
+<div ng-repeat="item in incidente.origen  | filter: { OrigenProblemaId:   incidente.incidente.OrigenProblemaId }:true">{{item.Nombre}}</div>
+
+
+
+
+
+										</span>									</div>
+       </div>
+
+       <div class="form-group">
+           <label for="" class="col-sm-2">Código termino</label>
+
+           <div class="col-sm-10">
+										<span class="ui-select">
+
+
+                      <div ng-repeat="item in incidente.codigo  | filter: { CodigoTerminoId:   incidente.incidente.CodigoTerminoId }:true">{{item.Nombre}}</div>
+
+
+
+										</span>									</div>
+       </div>
+
+
+
+
+    <div class="form-group">
+     <label for="" class="col-sm-2">Consultor asignado</label>
+
+     <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.UsuarioIdConsultor}}</p>
+																		</div>
+    </div>
+
+
+
+     <div class="form-group">
+       <label for="" class="col-sm-2">Respuesta</label>
+       <div class="col-sm-10 col-md-4">
+         <textarea rows="3" class="form-control" ng-model="incidente.incidente.RespuestaKU" name="respuestaKU"  placeholder="Respuesta del KeyUser"></textarea>
+       </div>
+     </div>
+
+
+     <div class="form-group">
+       <label for="" class="col-sm-2">¿Se encuentra solucionado?</label>
+       <div class="col-sm-4">
+         <table width="190" border="0" cellspacing="0" cellpadding="0">
+           <tbody><tr>
+             <td><input type="radio" ng-model="incidente.incidente.EstadoSolucion" id="radio" value="1"  ></td>
+             <td><strong>SI</strong></td>
+             <td><input type="radio" ng-model="incidente.incidente.EstadoSolucion" id="radio2" value="0"></td>
+             <td><strong>NO</strong></td>
+           </tr>
+           </tbody></table>
+       </div>
+     </div>
+
+
+
+
+     <div class="form-group"  >
+           <div class="col-sm-10 col-sm-offset-2">
+               <button type="button" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
+
+               <button type="button" ng-disabled="incidente.incidente.EstadoSolucion != 1" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(99)">Cerrar Incidente</button>
+
+              <button type="button" ng-disabled="incidente.incidente.EstadoSolucion != 0" class="btn btn-w-md btn-gap-v btn-danger" ng-click="GrabarIncidente(55)">Enviar a Consultor</button>
+           </div>
+       </div>
+
+
+       <div class="col-md-12">
+           <h3>Tabla de eventos</h3>
+           <table ng-repeat="hist in incidente.historial" class="table table-bordered">
+               <tbody>
+               <tr>
+                   <th width="20%">Número</th>
+                   <td>{{hist.IncidenteHistorialId}}</td>
+               </tr>
+               <tr>
+                   <th>Fecha</th>
+                   <td>{{hist.FechaEvento | date:'MM/dd/yyyy h:mma'}}</td>
+               </tr>
+               <tr>
+                   <th>Estado</th>
+                   <td><span ng-repeat="item in incidente.estado | filter:{EstadoId:hist.Estado}">({{item.EstadoId}}) {{item.Nombre}}</span></td>
+               </tr>
+               <tr>
+                   <th>Texto</th>
+                   <td>{{hist.Observacion}}</td>
+               </tr>
+               <tr>
+                   <th>Usuario</th>
+                   <td>{{hist.UsuarioId}} </td>
+               </tr>
+
+
+
+               <tr>
+                   <th>Código Término</th>
+                   <td><span ng-repeat="item in incidente.codigo | filter:{CodigoTerminoId:hist.CodigoTerminoId}:true">{{item.Nombre}}</span> </td>
+               </tr>
+
+               <tr>
+                   <th>Adjuntos</th>
+                   <td><ul><li ng-repeat="archivo in incidente.adjunto | filter: { HistorialId: hist.IncidenteHistorialId } "><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a></li></ul></td>
+               </tr>
+               </tbody>
+           </table>
+
+
+       </div>
+
+
+
+
+
+   </form>
+
+
+  </div>
+ </section>
+    </div>
+  </div>

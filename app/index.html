@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en-us" data-ng-app="smartApp">
+	<head>
+		<meta charset="utf-8">
+		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
+
+		<title> SmartAdmin </title>
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<!-- Basic Styles -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
+
+		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
+
+		<!-- SmartAdmin RTL Support is under construction-->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
+
+		<!-- We recommend you use "your_style.css" to override SmartAdmin
+		     specific styles this will also ensure you retrain your customization with each SmartAdmin update. -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
+
+		<!-- Goes with demo.js, you can delete this css when designing your own WebApp -->
+		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css" >
+
+
+
+
+		<!-- FAVICONS -->
+		<link rel="shortcut icon" href="img/favicon/favicon.ico" type="image/x-icon">
+		<link rel="icon" href="img/favicon/favicon.ico" type="image/x-icon">
+
+		<!-- GOOGLE FONT -->
+		<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+		<!-- Specifying a Webpage Icon for Web Clip
+			 Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		<link rel="apple-touch-icon" href="img/splash/sptouch-icon-iphone.png">
+		<link rel="apple-touch-icon" sizes="76x76" href="img/splash/touch-icon-ipad.png">
+		<link rel="apple-touch-icon" sizes="120x120" href="img/splash/touch-icon-iphone-retina.png">
+		<link rel="apple-touch-icon" sizes="152x152" href="img/splash/touch-icon-ipad-retina.png">
+
+		<!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<!-- Startup image for web apps -->
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+		<link rel="apple-touch-startup-image" href="img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+		<link rel="apple-touch-startup-image" href="img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+
+<!-- Add custom CSS here -->
+    <link href="css/landing-page.css" rel="stylesheet">
+	</head>
+	<body class="menu-on-top" data-ng-controller="SmartAppController">
+		<!-- POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width, top-menu
+			 You can also add different skin classes such as "smart-skin-0", "smart-skin-1" etc...-->
+
+		<!-- HEADER -->
+		<header id="header" ng-show="habilitarMenu" data-ng-include="'/includes/header.html'"></header>
+		<!-- END HEADER -->
+	<!-- RIBBON -->
+			<div id="ribbon" ng-show="habilitarMenu" data-ng-include="'/includes/ribbon.html'" data-ribbon=""></div>
+		<!-- Left panel : Navigation area -->
+		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+		<aside id="left-panel" ng-show="habilitarMenu"><span data-ng-include="'/includes/left-panel.html'"></span></aside>
+		<!-- END NAVIGATION -->
+	
+
+		
+
+			<!-- MAIN CONTENT -->
+			<br>
+			<div id="content" data-ng-view="" class="view-animate"></div>
+	
+			<!-- END MAIN CONTENT -->
+
+
+		<!-- SHORTCUT AREA : With large tiles (activated via clicking user name tag)
+		Note: These tiles are completely responsive,
+		you can add as many as you like
+		-->
+	
+
+		<!--================================================== -->
+
+		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
+
+		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script>
+			if (!window.jQuery) {
+				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+			}
+		</script>
+
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+		<script>
+			if (!window.jQuery.ui) {
+				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+			}
+		</script>
+
+	
+
+
+		<!-- BOOTSTRAP JS -->
+		<script src="js/bootstrap/bootstrap.min.js"></script>
+
+		
+		<!-- JARVIS WIDGETS -->
+		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+
+		
+	
+
+	
+		<!-- AngularJS -->
+		<script src="js/libs/angular/angular.js"></script>
+	  	<script src="js/libs/angular/angular-route.js"></script>
+	  	<script src="js/libs/angular/angular-animate.js"></script>
+	  	
+	  	
+	  		<script src="js/libs/angular/angular.js"></script>
+	  		
+	  	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+	  	
+	  	<script src="js/libs/angular/ui-bootstrap-custom-tpls-0.11.0.js"></script>
+
+
+	<script src="js/libs/angular-file-upload.js"></script>
+		<script src="js/libs/angular-file-upload-shim.min.js"></script>
+	
+	
+
+		<!-- ANGULAR: Handled via "ribbon" directive
+		<script src="js/demo.js"></script>-->
+		
+		
+		<!-- ElasticSearch --> 
+		 <script src="bower_components/elasticsearch/elasticsearch.angular.js"></script>
+		 <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>  
+	 <script src="bower_components/checklist-model/checklist-model.js"></script>  
+		<!-- MAIN APP JS FILE -->
+		<script src="js/app.js"></script>
+
+<!-- Otras Librerias  --> 
+	<script src="js/plugin/bootstrap-progressbar.min.js"></script>
+
+
+		<!-- MAIN ANGULAR JS FILE -->
+	  	<script src="js/ng/ng.app.js"></script>
+	  	<script src="js/ng/ng.controllers.js"></script>
+	  	<script src="pages/account/login/login.controller.js"></script>
+	  	<script src="pages/Administracion/usuarios/usuarios.controller.js"></script>
+	  		<script src="pages/Iniciativas/crearIniciativa/crearIniciativa.controller.js"></script>
+	  		  	<script src="pages/Administracion/codigoTermino/codigoTermino.controller.js"></script>
+	  		  	  	<script src="pages/Administracion/origenProblema/origenProblema.controller.js"></script>
+	  		  	  	<script src="pages/Administracion/tipoIncidente/tipoIncidente.controller.js"></script>
+	  		  	  		<script src="pages/Administracion/subtipo/subtipo.controller.js"></script>
+	  		  	  		<script src="pages/incidente/incidente.controller.js"></script>
+	  		  	  		   <script src="pages/Iniciativas/completarIniciativa/completarIniciativa.controller.js"></script>
+	  		  	  	  <script src="pages/Iniciativas/listarIniciativa/listarIniciativa.controller.js"></script>
+	  		  	  	  <script src="pages/proyecto/misProyectos.controller.js"></script>
+	  		  	  	    <script src="pages/proyecto/bpProyectos.controller.js"></script>
+	  		  	  	  <script src="pages/proyecto/editarProyecto.controller.js"></script>
+	  		  	  	   <script src="pages/proyecto/verProyecto.controller.js"></script>
+	  		  	  	  <script src="pages/proyecto/seleccionEquipo.controller.js"></script>	  
+	  		  	  	  <script src="pages/Iniciativas/iniciativas.controller.js"></script>
+	  		  	  	  <script src="pages/proyecto/aprobacionEmail.controller.js"></script>
+	  		  	  	  <script src="pages/proyecto/avanceProyecto.controller.js"></script>
+	  		  	  	  
+	  		  	  	  <script src="pages/proyecto/version.controller.js"></script>
+	  	<script src="js/ng/ng.directives.js"></script>
+        
+         <script src="directivas/config.js"></script>
+         <script src="directivas/typehead.js"></script>
+         <script src="directivas/auth.service.js"></script>
+         <script src="directivas/user.service.js"></script>
+         <script src="includes/controller.navbar.js"></script>
+	  	<!-- PLUNKER -->
+	  	<script src="js/ng/plunker.js"></script>
+	  	
+	  	<!-- opciones de menu --> 
+	  	 	<script src="pages/main/main.js"></script>
+			<script src="pages/account/login/login.js"></script>
+				<script src="pages/Administracion/usuarios/usuarios.js"></script>
+						<script src="pages/Administracion/codigoTermino/codigoTermino.js"></script>
+						<script src="pages/Administracion/origenProblema/origenProblema.js"></script>
+						<script src="pages/Administracion/tipoIncidente/tipoIncidente.js"></script>
+							<script src="pages/Administracion/subtipo/subtipo.js"></script>
+	      <script src="pages/Iniciativas/crearIniciativa/crearIniciativa.js"></script>
+	         <script src="pages/Iniciativas/completarIniciativa/completarIniciativa.js"></script>
+	                  <script src="pages/Iniciativas/listarIniciativa/listarIniciativa.js"></script>
+	                  <script src="pages/Iniciativas/iniciativas.js"></script>
+	                        <script src="pages/proyecto/proyecto.js"></script>
+	                  <script src="pages/Iniciativas/verHistorial/verHistorial.controller.js"></script>
+	      	<script src="pages/incidente/incidente.js"></script>
+	      	  <script src="js/libs/validate/jquery.validate.js"></script>
+    <script src="js/libs/validate/jquery.validate.unobtrusive.js"></script>
+	      		<script src="pages/incidente/validacion.crearincidente.js"></script>
+	     
+		<!-- Your GOOGLE ANALYTICS CODE Below -->
+		<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+		</script>
+
+	</body>
+
+</html>

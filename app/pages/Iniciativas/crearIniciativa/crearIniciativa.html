@@ -1,0 +1,102 @@
+
+	
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Iniciativa
+			<span>>  
+			Crear Iniciativa
+			</span>
+		</h1>
+	</div>
+</div> 
+
+<section id="widget-grid" class="">
+	<div class="well">
+
+               
+               <div class="alert alert-block alert-danger" ng-show="!paginaValida">
+	<a class="close" data-dismiss="alert" href="#">×</a>
+	<h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
+	<p>
+		 Se han encontrado errores o falta de información, por favor verifique
+	</p>
+</div>
+               
+                
+                <form ng-submit="validar()" class="form-horizontal ng-pristine ng-valid"  role="form" name="formualario" novalidate>
+                    <div class="row">
+                        <div class ="col-md-6">
+                    <div class="form-group"  ng-class="{ 'has-error' :!paginaValida && formualario.nombreDelProyecto.$error.required}">
+                        <label for="nombreDelProyecto" class="col-sm-4 control-label">Nombre del Proyecto</label>
+                    <div class="col-sm-6">
+                            <input type="text" class="form-control" name="nombreDelProyecto" id="nombreDelProyecto" ng-model="proyecto.nombre" placeholder="Nombre del Proyecto" required >
+                       <p ng-show="!paginaValida && formualario.nombreDelProyecto.$error.required" class="help-block">Debe ingresar el "Nombre del Proyecto"</p>
+                    </div>
+                       
+                       
+                    </div>
+                         </div>
+                         
+                     <div class ="col-md-6">
+                      <div class="form-group"   >
+                      <label  for="solicitante" class="col-sm-4 control-label">Solicitante</label>
+                        <div class="col-sm-6">
+                            <input type="text" name ="solicitante" id="solicitante" class="form-control" disabled="" value="{{proyecto.usuario.nombre}}">
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class="row">
+                          <div class ="col-md-6">
+                    <div class="form-group"  ng-class="{ 'has-error' :!paginaValida && formualario.empresa.$error.required}">
+                       <label  class="col-sm-4 control-label">Empresa</label>
+                        <div class="col-sm-6">
+							     <label class="select">
+										 <select class="input-sm" ng-model="proyecto.empresa" ng-change="cargaDepartamento()" name="empresa" ng-options="item as item.nombre  for item in listas.empresa" required >
+                                              <option value="">-- Seleccione Empresa --</option>
+                                           </select>
+                              <p   ng-show="!paginaValida && formualario.empresa.$error.required" class="help-block">Debe seleccionar una "Empresa"</p> <i></i> 
+                              </label>
+								
+                           </div>
+                        </div>
+                         </div>
+                         <div class ="col-md-6">
+                         <div class="form-group"   ng-class="{ 'has-error' :!paginaValida && formualario.departamento.$error.required}" >
+                        <label  class="col-sm-4 control-label">Departamento</label>
+                        <div class="col-sm-6">
+                            	<label class="select">
+                            <select class="input-sm" ng-model="proyecto.departamento" name="departamento" ng-options="item as item.nombre  for item in listas.departamento" required >
+                                 <option value="">-- Seleccione Departamento --</option>
+                                
+                            </select>
+                             <p ng-show="!paginaValida && formualario.departamento.$error.required"   class="help-block">Debe Seleccionar un "Departamento"</p>
+                        </label>
+                        </div>
+                    </div>
+                        </div>
+                   </div>
+
+
+
+
+
+
+<div class="row"> 
+                    <div class="form-group" ng-class="{ 'has-error' :!paginaValida && formualario.resumenEjecutivo.$error.required}">
+                        <label for="resumenEjecutivo" class="col-sm-2 control-label">Resumen Ejecutivo</label>
+                        <div class="col-sm-10">
+                            <textarea name="resumenEjecutivo" ng-model="proyecto.resumenEjecutivo"  id="resumenEjecutivo" value ="{{proyecto.resumenEjecutivo}}" class="form-control" rows="8" required ></textarea>
+                        <p ng-show="!paginaValida && formualario.resumenEjecutivo.$error.required"  class="help-block">Debe Agregar un "Resumen ejecutivo"</p>
+                       </div>
+                    </div>
+</div>
+                
+   <button type="submit" class="btn btn-default btn-primary">Enviar Solicitud</button>
+     </form>
+    </div>
+</section>

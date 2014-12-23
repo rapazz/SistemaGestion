@@ -1,0 +1,128 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Proyecto
+			<span>>  
+		Mis Proyectos
+			</span>
+		</h1>
+	</div>
+</div> 
+<section id="widget-grid" class="">
+    	<div class="well">
+    	    	<div class="widget-body no-padding">
+	<div class="table-responsive">
+								
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th>ID Proyecto</th>
+										<th>Nombre Proyecto</th>
+										<th> Empresa</th>
+										<th>Solicitante</th>
+										<th>fecha Creacion</th>
+									     <th>Etapa </th>
+										<th>Estado</th>
+											<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr  ng-repeat="item in proyectos">
+										<td>{{item.idProyecto}}</td>
+										<td><a href="#/proyecto/ver/{{item.idProyecto}}">{{item.nombre}}</a></td>
+										<td>{{item.empresa.nombre}}</td>
+										<td>{{item.usuario.nombre}}</td>
+										<td>{{item.fechaCreacion | date:'dd-MM-yyyy'}}</td>
+											<th>{{item.etapa.nombre}}</th>
+												<th>{{item.estadoProyecto.nombre}}</th>
+										<td><a ref ng-click="verHistorial(item.idProyecto)" alt="ver Historial"><span class="fa-fw fa-2x fa fa-calendar" ></span></a> 
+										<a ng-show="item.idEtapaProyecto==4" ref ng-click="avanceProyecto(item.idProyecto)" alt="Avance"><span class="fa-fw fa-2x fa fa-bars" ></span></a> </td>
+										
+									</tr>
+								
+								</tbody>
+							</table>
+							
+						</div>
+						</div>
+						</div>
+</section>
+        <style>
+.help-block {
+display: block;
+margin-top: 5px;
+margin-bottom: 10px;
+color: #E81717;
+}
+
+.fileinput-button 
+{
+	position: relative;
+	overflow: hidden;
+}
+
+.fileinput-button input 
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+	opacity: 0;
+	filter: alpha(opacity=0);
+	transform: translate(-300px, 0) scale(4);
+	font-size: 23px;
+	direction: ltr;
+	cursor: pointer;
+}
+
+
+	.estilo-col-titulo {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		background-color: rgba(61, 106, 124, 0.15);
+		border: 1px solid rgba(61, 106, 124, 0.2);
+		font-size: 85%!important;
+		font-weight: bold;
+	}
+
+
+	.estilo-col-cabecera{
+		padding-top: 15px;
+		padding-bottom: 15px;
+		border: 1px solid rgba(61, 106, 124, 0.2);
+		font-size:180%!important;
+	}
+
+
+	.estilo-col{
+		padding-top: 10px;
+		padding-bottom:10px;
+		border: 1px solid rgba(61, 106, 124, 0.2);
+		font-size: 85%!important;
+		
+	}
+
+.estilo-col-input{
+		padding-top: 2px;
+		padding-bottom: 2px;
+		border: 1px solid rgba(61, 106, 124, 0.2);
+		font-size: 90%!important;
+		
+	}
+.estilo-input{
+	
+		font-size: 85%!important;
+	}
+
+
+.modal-body2 {
+    max-height: 1600px;
+     max-width: 1000px;
+     width:700px;
+}	
+
+	
+</style>

@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Iniciativa
+			<span>>  
+			Mis Iniciativas
+			</span>
+		</h1>
+	</div>
+</div> 
+
+<section id="widget-grid" class="">
+	<div class="well">
+	
+
+					
+	
+		<div class="widget-body">
+						
+						
+						<div class="table-responsive">
+						
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nombre</th>
+										<th>Empresa</th>
+										<th>Departamento</th>
+										<th>Fecha Creacion</th>
+											<th>Business Partner</th>
+											<th>Etapa</th>
+											<th>Estado</th>
+											<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in proyectos">
+											<th>{{item.idProyecto}}</th>
+										<th>{{item.nombre}}</th>
+										<th>{{item.empresa.nombre}}</th>
+										<th>{{item.departamento.nombre}}</th>
+										<th>{{item.fechaCreacion  | date:'dd-MM-yyyy'}}</th>
+											<th>{{item.usuarioBp.nombre}}</th>
+											<th>{{item.etapa.nombre}}</th>
+												<th>{{item.estadoProyecto.nombre}}</th>
+											<th>	<a ref ng-click="show(item.idProyecto)" alt="ver Historial"><span class="fa-fw fa-2x fa fa-calendar" > </span>
+							
+						</a></th>
+									</tr>
+							 </tbody>
+							</table>
+							
+						</div>
+					</div>
+	
+	
+		</div>
+</section>

@@ -1,0 +1,193 @@
+         <div class="modal fade">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Avance Proyecto</h4>
+              </div>
+               <div class="modal-body">
+                   <div class="row ">
+		<div class="col-md-3 estilo-col-titulo">
+		ID Proyecto 
+		</div>
+		<div class="col-md-3 estilo-col">
+		{{proyecto.idProyecto}}
+		</div>
+			<div class="col-md-3 estilo-col-titulo">
+		Nombre Proyecto 
+		</div>
+		<div class="col-md-3 estilo-col">
+		{{proyecto.nombre}}
+		</div>
+	</div>	 
+
+
+
+<div class="row ">
+		<div class="col-md-3 estilo-col-titulo">
+	Fecha Comienzo 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.fechaEstimadaComienzo}}
+		</div>
+			<div class="col-md-3 estilo-col-titulo">
+	Fecha Fin Proyecto 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{proyecto.fechaEstimadaCierre}}
+		</div>
+	</div>
+<div class="row ">
+		<div class="col-md-3 estilo-col-titulo">
+	Salud Proyecto 
+		</div>
+		<div class="col-md-4 estilo-col-input">
+		<label class="select">
+                            <select class="input-sm estilo-input" ng-model="proyecto.saludProyecto" id="saludProyecto" name="saludProyecto" ng-options="item as item.nombre  for item in listas.saludProyecto track by item.id" required>
+                                 <option value="">-- Seleccione Salud --</option>
+                                
+                            </select>
+                        
+        </label>
+	<p ng-show="!paginaValida && formulario.saludProyecto.$error.required" class="help-block">Debe seleccionar la Salud del Proyecto</p>	
+		</div>
+		
+			<div class="col-md-3 estilo-col-titulo">
+Avance
+		</div>
+		<div class="col-md-2 estilo-col-input">
+		<input type="number" class="form-control estilo-input" name="avance" id="avance" ng-model="proyecto.avance" placeholder="" required >
+	<p ng-show="!paginaValida && formulario.avance.$error.required" class="help-block">debe Completar el avance</p>	
+		</div>
+	</div>
+	<div class="row ">
+	<div class="col-md-3 estilo-col-titulo">
+	Comentarios
+		</div>
+	<div class="col-md-9 estilo-col-input">
+		<textarea name="comentarioAvance" ng-model="proyecto.comentarioAvance"  id="comentarioAvance" value ="{{proyecto.comentarioAvance}}" class="form-control estilo-input" rows="4" ></textarea>
+		</div> 
+	
+</div>	
+    
+   <br> 
+<div class="row " ng-show="proyecto.idEtapaProyecto>2">
+		<div class="col-md-3  estilo-col-titulo">
+Nombre 
+		</div>
+
+		<div class="col-md-3 estilo-col-titulo">
+Semana Entrega 
+		</div>
+			<div class="col-md-3  estilo-col-titulo">
+fecha Estimada  
+		</div>
+		<div class="col-md-3 estilo-col-titulo">
+Opciones  
+		</div>
+	
+</div>	
+<div class="row " ng-show="proyecto.idEtapaProyecto>2" ng-repeat="item in arrEntregable">
+		<div class="col-md-3  estilo-col">
+{{item.tipoEntregable.nombre}}
+		</div>
+
+		<div class="col-md-3 estilo-col">
+{{item.semanaEntrega}} 
+		</div>
+			<div class="col-md-3  estilo-col">
+{{item.fechaEstimada | date:'dd-MM-yyyy'}} 
+		</div>
+		<div class="col-md-3  estilo-col">
+<input ng-show="item.estado==0" type="checkbox" checklist-model="arrCheck" checklist-value="item.idEntregable">
+<span ng-show="item.estado ==1">Entregado</span>
+		</div>
+	
+</div>    
+<br>
+<br>
+<div class="row">
+	<div class="col-md-10 estilo-col">
+	<div class="row">
+		<div class="col-md-4">
+			<input type="text" class="form-control estilo-input" name="adjuntoNombre" id="adjuntoNombre" ng-model="adjuntoNombre" placeholder="Descripcion Archivo" >
+			
+			
+		</div>
+		<div class="col-md-4">
+			    <label class="select">
+                            <select class="input-sm estilo-input" ng-model="tipoAdjunto" name="tipoAdjunto" ng-options="item as item.nombre  for item in listas.tipoAnexos track by item.id">
+                                 <option value="">-- Seleccione Tipo Archivo --</option>
+                                
+                            </select>
+                        
+                        </label> 
+		</div>
+		<div class="col-md-4" ng-show="porcentajeAvance>0">
+			Subiendo {{porcentajeAvance}} %
+		
+		</div>
+
+
+			<div class="col-md-2">
+			     <div class="controls">
+        <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <input type="file" name="file" ng-file-select="onFileSelect($files)" ><span>Agregar Archivo</span>
+        </span>
+		</div>
+		
+	</div>
+                  
+     </div>
+		
+	
+	
+</div>
+<br>
+</div>
+<div class="row">
+		<div class="col-md-4  estilo-col-titulo">
+Descripcion 
+		</div>
+<div class="col-md-4  estilo-col-titulo">
+Tipo Adjunto 
+</div>
+		<div class="col-md-2  estilo-col-titulo">
+Fecha Creacion 
+		</div>
+		
+
+	
+	
+</div>
+<div class="row" ng-repeat="item in arrAdjuntos">
+		<div class="col-md-4  estilo-col">
+<a href="api/proyectoAdjunto/{{item.urlArchivo}}" target="_blank"> {{item.descripcion}}</a> 
+		</div>
+
+		<div class="col-md-4  estilo-col">
+{{item.tipoAdjunto.nombre}} 
+		</div>
+			<div class="col-md-2  estilo-col">
+{{item.fechaCreacion | date:'dd-MM-yyyy'}} 
+		</div>
+			
+
+
+
+
+	
+</div>		
+                   
+                   
+               </div>
+              <div class="modal-footer">
+                   <button type="button" ng-click="actualizarAvance()" class="btn btn-default" data-dismiss="modal">Guardar</button>
+                <button type="button" ng-click="close('No')" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        

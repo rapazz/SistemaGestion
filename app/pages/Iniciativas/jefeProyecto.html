@@ -1,0 +1,62 @@
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Iniciativa
+			<span>>  
+		Aprobacion Iniciativas
+			</span>
+		</h1>
+	</div>
+</div> 
+
+<section id="widget-grid" class="">
+	<div class="well">
+	
+
+					
+	
+		<div class="widget-body">
+						
+						
+						<div class="table-responsive">
+						
+							<table class="table table-bordered">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>Nombre</th>
+										<th>Empresa</th>
+										<th>Departamento</th>
+										<th>Fecha Creacion</th>
+											<th>Jefe Proyecto</th>
+											<th>Etapa</th>
+											<th>Estado</th>
+											<th>Acciones</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in proyectos">
+											<th>{{item.idProyecto}}</th>
+										<th>{{item.Nombre}}</th>
+										<th>{{item.empresa.nombre}}</th>
+										<th>{{item.departamento.nombre}}</th>
+										<th>{{item.fechaCreacion}}</th>
+											<th>{{item.jefeProyecto.nombre}}</th>
+											<th>{{item.etapa.nombre}}</th>
+												<th>{{item.estadoProyecto.nombre}}</th>
+											<th><a href='#/iniciativa/editar/{{item.idProyecto}}' alt="Editar Proyecto"><span class="fa-fw fa-2x fa fa-edit" >	<a ref ng-click="verHistorial(item.idProyecto)" alt="ver Historial"><span class="fa-fw fa-2x fa fa-calendar" > </span>
+							
+						</a></th>
+									</tr>
+							 </tbody>
+							</table>
+							
+						</div>
+					</div>
+	
+	
+		</div>
+</section>

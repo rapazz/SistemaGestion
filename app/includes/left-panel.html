@@ -1,0 +1,35 @@
+<div ng-Controller='navbarController'>
+<!-- User info -->
+			<div class="login-info">
+				<span> <!-- User image size is adjusted inside CSS, it should stay as is --> 
+					
+					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+						<img src="img/avatars/sunny.png" alt="me" class="online" /> 
+						<span data-localize="john.doe">
+						Aca deberoa or eñ mp,nre de KPISDASDAS DAÑSDALSD[ASdsdasdasd  asasd  
+						</span>
+						<i class="fa fa-angle-down"></i>
+					</a> 
+					
+				</span>
+			</div>
+			<!-- end user info -->
+
+			<!-- NAVIGATION : This navigation is also responsive
+
+			To make this navigation dynamic please make sure to link the node
+			(the reference to the nav > ul) after page load. Or the navigation
+			will not initialize.
+			-->
+
+
+			<navigation ng-repeat="menus in menu">
+			
+				<nav:item data-view={{menus.url}} data-icon={{menus.estilo}} title={{menus.Nombre}} ng-if="menus.subMenu.length==0" />
+				<nav:group data-icon={{menus.estilo}}  title={{menus.Nombre}} ng-if="menus.subMenu.length>0" >
+					<nav:item  data-view={{subMenus.url}}  title={{subMenus.Nombre}} ng-repeat="subMenus in menus.subMenu"  />
+				</nav:group>
+			</navigation>
+			<span class="minifyme" data-action="minifyMenu"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+			
+	</div>

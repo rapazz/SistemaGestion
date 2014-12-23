@@ -1,0 +1,120 @@
+
+	
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Administracion
+			<span>>  
+			Usuarios
+			</span>
+		</h1>
+	</div>
+</div> 
+<section id="widget-grid" class="">
+			<div class="well">
+		<div class="input-group">
+		   <typeahead items="items" prompt="Ingrese Nombre..." title="name" subtitle="abbreviation" codigo="idEmail" model="nombre" on-select="seleccionarUsuario()" />
+
+		
+			<div class="input-group-btn">
+				<button class="btn btn-default btn-primary" type="button">
+					<i class="fa fa-search"></i> Buscar
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="well">
+		<div class="row">
+		
+		<form action="" id="checkout-form" class="smart-form" novalidate="novalidate" ng-submit="actualizarUsuario()">
+
+							<fieldset>
+								<div class="row">
+									<section class="col col-6">
+									<label class="label">Nombre Completo</label>
+										<label class="input"> <i class="icon-prepend fa fa-user"></i>
+											<input type="text" ng-model="nombre" placeholder="" disabled>
+									</section>
+									<section class="col col-4">
+										<label class="label">Rut</label>
+										<label class="input"> <i class="icon-prepend fa fa-user"></i>
+											<input type="text" ng-model="rut" placeholder="" disabled>
+										</label>
+									</section>
+								</div>
+
+								<div class="row">
+									<section class="col col-3">
+										<label class="label">Cargo</label>
+										<label class="input"> <i class="icon-prepend fa fa-user"></i>
+											<input type="text" ng-model="cargo" placeholder="" disabled>
+										</label>
+									</section>
+									<section class="col col-3">
+										<label class="label">Email</label>
+										<label class="input"> <i class="icon-prepend fa fa-envelope-o"></i>
+											<input type="text" ng-model="email" placeholder="" disabled>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label class="label">Empresa</label>
+										<label class="input"> <i class="icon-prepend fa fa-building"></i>
+											<input type="text" ng-model="empresa" placeholder=""  disabled>
+										</label>
+									</section>
+							
+								</div>
+								<div class="row">
+					
+								
+								<header>
+							Roles Usuario
+							</header>
+							<br>
+								<section class="col col-10">
+									<div  class="inline-group">
+								
+										<label class="checkbox" ng-repeat="item in roles">
+											<input type="checkbox" ng-model="arrayRoles[item.rolId]">
+											<i></i>{{item.nombre}}</label>
+	
+									</div>
+									
+								</section>
+								</div>
+								
+								
+							</fieldset>
+							<footer>
+								<div class="alert alert-success fade in" >
+				<button class="close" data-dismiss="alert">
+					×
+				</button>
+				<i class="fa-fw fa fa-check"></i>
+				<strong>Bien ..</strong> El Usuario ha sido modificado.
+			</div>
+								<button type="submit" class="btn btn-primary" ng-disabled="!activarBoton">
+									Actualizar Usuario
+								</button>
+							</footer>
+						</form>
+	
+	
+		</div>
+	</div>
+	
+	
+			
+
+	
+	
+	
+</section>
+	<!-- END MAIN PANEL -->
+	
+
+
+

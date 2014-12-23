@@ -1,0 +1,64 @@
+<style>
+  .content-btn{
+    padding: 10px;
+  }
+</style>
+
+
+<div class="row">
+  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+    <h1 class="page-title txt-color-blueDark">
+
+      <!-- PAGE HEADER -->
+      <i class="fa-fw fa fa-pencil-square-o"></i>
+      Administración
+			<span>>
+			Módulos
+			</span>
+    </h1>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="content-btn clearfix bg-success">
+      <button type="button" class="btn btn-w-md btn-gap-v btn-success pull-right" ng-click="Agregar()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+
+<section class="panel panel-default">
+
+    <div class="panel-body"  >
+
+        <table class="table table-bordered">
+            <thead>
+            <tr >
+                <th width="16%">Código</th>
+                <th width="15%">Nombre</th>
+                <th width="15%">Tipo</th>
+                <th width="15%">Fecha Ingreso</th>
+
+                <th width="18%">Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat='order in data'>
+                <td>{{order.SubTipoIncidenteId}}</td>
+                <td>{{order.Nombre}}</td>
+                <td>{{order.NombreTipo}}</td>
+                <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
+
+                <td>
+
+                    <a class="btn btn-primary"  href="/#/Administracion/subtipo/editar/{{order.SubTipoIncidenteId}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                    <!--<a class="btn btn-danger" href="javascript:confirm('Esta seguro que desea eliminar?)"><i class="glyphicon glyphicon-remove"></i></a>-->										</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</section>

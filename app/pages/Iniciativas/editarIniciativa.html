@@ -1,0 +1,106 @@
+
+	
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa-fw fa fa-pencil-square-o"></i> 
+				Iniciativa
+			<span>>  
+			Revisar Iniciativa
+			</span>
+		</h1>
+	</div>
+</div> 
+
+<section id="widget-grid" class="">
+	<div class="well">
+
+                <div ng-show="!paginaValida"  class="alert alert-danger" role="alert"> Se han encontrado errores o falta de información, por favor verifique</div>
+                
+                <form ng-submit="actualizar()" class="form-horizontal"  role="form" name="formualario" novalidate>
+                    <div class="form-group">
+                        <label for="nombreDelProyecto" class="col-sm-2 control-label">Nombre del Proyecto</label>
+                        <div class="col-sm-5">
+                            <input type="text" class="form-control" name="nombreDelProyecto" id="nombreDelProyecto" ng-model="proyecto.Nombre" placeholder="Nombre del Proyecto"  disabled="disabled">
+                         </div>
+                       
+                        <label  class="col-sm-1 control-label">Solicitante</label>
+                        <div class="col-sm-4">
+
+                            <input type="text" class="form-control" disabled="" ng-model="proyecto.usuario.nombre"  disabled="disabled">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                      
+                        <label  class="col-sm-2 control-label">Empresa</label>
+                        <div class="col-sm-3">
+                           <input type="text" class="form-control" disabled="" ng-model="proyecto.empresa.nombre"  disabled="disabled">
+								
+							   
+                            
+								
+                         
+                           </div>
+                        <label  class="col-sm-1 control-label">Departamento</label>
+                        <div class="col-sm-4">
+                         <input type="text" class="form-control" disabled="" ng-model="proyecto.departamento.nombre"  disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="resumenEjecutivo" class="col-sm-2 control-label">Resumen Ejecutivo</label>
+                        <div class="col-sm-10">
+                            <textarea name="resumenEjecutivo" ng-model="proyecto.resumenEjecutivo"  id="resumenEjecutivo" value ="{{proyecto.resumenEjecutivo}}" class="form-control" rows="8" disabled="disabled"></textarea>
+                        
+                        </div>
+                        
+                    </div>
+                    
+                     <div class="form-group">
+                        <label for="jefeProyecto" class="col-sm-2 control-label">Estado Del Proyecto</label>
+                        <div class="col-sm-10">
+                           <label class="select">
+                            <select class="input-sm" ng-model="proyecto.estadoProyecto" name="estadoProyecto" ng-options="item as item.nombre  for item in listas.estadoProyecto track by item.idEstadoProyecto">
+                                 <option value="">-- Seleccione Estado --</option>
+                                
+                            </select>
+                        
+                        </label>
+                        </div>
+                        </div>
+                    
+                    <div class="form-group">
+                        <label for="jefeProyecto" class="col-sm-2 control-label">Jefe Proyecto</label>
+                        <div class="col-sm-10">
+                           <label class="select">
+                            <select class="input-sm" ng-model="proyecto.jefeProyecto" name="jefeProyecto" ng-options="item as item.usuario.nombre  for item in listas.jefeProyecto track by item.usuario.usuarioId">
+                                 <option value="">-- Seleccione Jefe Proyecto --</option>
+                                
+                            </select>
+                        
+                        </label>
+                        </div>
+                        </div>
+                    
+                    <div class="form-group">
+                        <label for="comentarios" class="col-sm-2 control-label">Comentarios</label>
+                        <div class="col-sm-10">
+                            <textarea name="comentarios" ng-model="proyecto.comentarios"  id="resumenEjecutivo"  class="form-control" rows="4" ></textarea>
+                        
+                        </div>
+                        
+                    </div>
+<br>
+                   
+ <button  type="submit" class="btn btn-labeled btn-success">
+ <span class="btn-label">
+  <i class="glyphicon glyphicon-ok"></i>
+ Actualizar Iniciativa</span>
+</button>             
+ 
+</form>
+        
+    </div>  
+</section>
