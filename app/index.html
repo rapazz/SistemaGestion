@@ -10,14 +10,12 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<!-- Basic Styles -->
+		<!-- Estilos Externos Styles -->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="css/font-awesome.min.css">
-
 		<!-- SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables -->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-production.min.css">
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-skins.min.css">
-
 		<!-- SmartAdmin RTL Support is under construction-->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.min.css">
 
@@ -25,8 +23,6 @@
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update. -->
 		<link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css">
 
-		<!-- Goes with demo.js, you can delete this css when designing your own WebApp -->
-		<link rel="stylesheet" type="text/css" media="screen" href="css/demo.min.css" >
 
 
 
@@ -65,7 +61,7 @@
 		<header id="header" ng-show="habilitarMenu" data-ng-include="'/includes/header.html'"></header>
 		<!-- END HEADER -->
 	<!-- RIBBON -->
-			<div id="ribbon" ng-show="habilitarMenu" data-ng-include="'/includes/ribbon.html'" data-ribbon=""></div>
+		
 		<!-- Left panel : Navigation area -->
 		<!-- Note: This width of the aside area can be adjusted through LESS variables -->
 		<aside id="left-panel" ng-show="habilitarMenu"><span data-ng-include="'/includes/left-panel.html'"></span></aside>
@@ -90,20 +86,20 @@
 		<!--================================================== -->
 
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
-		<script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>-->
+		<script data-pace-options='{ "restartOnRequestAfter": true }' src="bower_components/plugin/pace/pace.min.js"></script>-->
 
 		<!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script>
 			if (!window.jQuery) {
-				document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+				document.write('<script src="bower_components/jquery-2.0.2.min.js"><\/script>');
 			}
 		</script>
 
 		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 		<script>
 			if (!window.jQuery.ui) {
-				document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+				document.write('<script src="bower_components/jquery-ui-1.10.3.min.js"><\/script>');
 			}
 		</script>
 
@@ -111,36 +107,36 @@
 
 
 		<!-- BOOTSTRAP JS -->
-		<script src="js/bootstrap/bootstrap.min.js"></script>
+		<script src="bower_components/bootstrap/bootstrap.min.js"></script>
 
 		
 		<!-- JARVIS WIDGETS -->
-		<script src="js/smartwidgets/jarvis.widget.min.js"></script>
+		<script src="bower_components/smartwidgets/jarvis.widget.min.js"></script>
 
 		
 	
 
 	
 		<!-- AngularJS -->
-		<script src="js/libs/angular/angular.js"></script>
-	  	<script src="js/libs/angular/angular-route.js"></script>
-	  	<script src="js/libs/angular/angular-animate.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+	  	<script src="bower_components/angular/angular-route.js"></script>
+	  	<script src="bower_components/angular/angular-animate.js"></script>
 	  	
 	  	
-	  		<script src="js/libs/angular/angular.js"></script>
+	  	
 	  		
 	  	<script src="bower_components/angular-cookies/angular-cookies.js"></script>
 	  	
-	  	<script src="js/libs/angular/ui-bootstrap-custom-tpls-0.11.0.js"></script>
+	  	<script src="bower_components/angular/ui-bootstrap-custom-tpls-0.11.0.js"></script>
 
 
-	<script src="js/libs/angular-file-upload.js"></script>
-		<script src="js/libs/angular-file-upload-shim.min.js"></script>
+	<script src="bower_components/angular-file-upload.js"></script>
+		<script src="bower_components/angular-file-upload-shim.min.js"></script>
 	
 	
 
 		<!-- ANGULAR: Handled via "ribbon" directive
-		<script src="js/demo.js"></script>-->
+		<script src="bower_components/demo.js"></script>-->
 		
 		
 		<!-- ElasticSearch --> 
@@ -148,15 +144,15 @@
 		 <script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>  
 	 <script src="bower_components/checklist-model/checklist-model.js"></script>  
 		<!-- MAIN APP JS FILE -->
-		<script src="js/app.js"></script>
+		<script src="pages/app.js"></script>
 
 <!-- Otras Librerias  --> 
-	<script src="js/plugin/bootstrap-progressbar.min.js"></script>
+	<script src="bower_components/plugin/bootstrap-progressbar.min.js"></script>
 
 
 		<!-- MAIN ANGULAR JS FILE -->
-	  	<script src="js/ng/ng.app.js"></script>
-	  	<script src="js/ng/ng.controllers.js"></script>
+	  	<script src="pages/ng.app.js"></script>
+	  	<script src="includes/ng.controllers.js"></script>
 	  	<script src="pages/account/login/login.controller.js"></script>
 	  	<script src="pages/Administracion/usuarios/usuarios.controller.js"></script>
 	  		<script src="pages/Iniciativas/crearIniciativa/crearIniciativa.controller.js"></script>
@@ -177,15 +173,14 @@
 	  		  	  	  <script src="pages/proyecto/avanceProyecto.controller.js"></script>
 	  		  	  	  
 	  		  	  	  <script src="pages/proyecto/version.controller.js"></script>
-	  	<script src="js/ng/ng.directives.js"></script>
+	  	<script src="includes/ng.directives.js"></script>
         
          <script src="directivas/config.js"></script>
          <script src="directivas/typehead.js"></script>
          <script src="directivas/auth.service.js"></script>
          <script src="directivas/user.service.js"></script>
          <script src="includes/controller.navbar.js"></script>
-	  	<!-- PLUNKER -->
-	  	<script src="js/ng/plunker.js"></script>
+	  
 	  	
 	  	<!-- opciones de menu --> 
 	  	 	<script src="pages/main/main.js"></script>
@@ -202,8 +197,8 @@
 	                        <script src="pages/proyecto/proyecto.js"></script>
 	                  <script src="pages/Iniciativas/verHistorial/verHistorial.controller.js"></script>
 	      	<script src="pages/incidente/incidente.js"></script>
-	      	  <script src="js/libs/validate/jquery.validate.js"></script>
-    <script src="js/libs/validate/jquery.validate.unobtrusive.js"></script>
+	      	  <script src="bower_components/validate/jquery.validate.js"></script>
+    <script src="bower_components/validate/jquery.validate.unobtrusive.js"></script>
 	      		<script src="pages/incidente/validacion.crearincidente.js"></script>
 	     
 		<!-- Your GOOGLE ANALYTICS CODE Below -->

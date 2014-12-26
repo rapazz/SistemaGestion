@@ -594,7 +594,7 @@ models.equipoProyecto.bulkCreate(equipoProyecto).success(function(x){
 
 function actualizarEntregable(req){
 var arr = JSON.parse(req.arrAntregables)
-console.log(arr);
+
 for (var i=0;i<=req.arrAntregables.length-1;i++)
 models.entregableProyecto.find({where:{idEntregable:req.arrAntregables[i]}}).success(function(x){
  

@@ -7,8 +7,8 @@ exports.setup = function (User, config) {
 
 passport.use(new GoogleStrategy({
 
-      clientID:'831491199430-n94n4hak4dufamvu2ck9n5b5b7vmo97j.apps.googleusercontent.com', //config.google.clientID,
-      clientSecret: 'qraRGD5-AYW3YY6miTUK7KOe',//config.google.clientSecret,
+      clientID: config.google.GOOGLE_ID,
+      clientSecret: config.google.GOOGLE_SECRET,
       callbackURL: config.google.callbackURL
       //access_type: 'offline'
     },
