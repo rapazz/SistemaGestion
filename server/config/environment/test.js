@@ -23,5 +23,9 @@ mailer: {
   mailDefecto: 'ckuknow@gmail.com'
   
   
+},
+rutaAdjunto:{ 
+  url:'archivos'
+  
 }
 }
