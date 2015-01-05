@@ -8,9 +8,9 @@ module.exports = {
     uri: 'mongodb://localhost/workspace-test'
   },
    google: {
-    GOOGLE_ID: '831491199430-r42u6nmguim4pvad4t4o78t653pvv1eo.apps.googleusercontent.com',
-    GOOGLE_SECRET: 'l9yeymvFoR97DGipcCLxGix2',
-    DOMAIN: 'http://gestionkcc-rapazz.c9.io:80'
+    GOOGLE_ID: '831491199430-0rssqbesfc4eo8s466p1m8bvnfoi8nl8.apps.googleusercontent.com',
+    GOOGLE_SECRET: 'jeUMYhqVtWMePF8yFNzvqeZw',
+    DOMAIN: 'http://gp.kcl.cl:9000'
   },
   mysql: {
     dialect:'mysql',
@@ -21,11 +21,11 @@ module.exports = {
   
 },
 mailer: {
-  host:'email-smtp.us-east-1.amazonaws.com',
-  port:2588,
-  user:'AKIAJGAHAGBMT56FERRA',
-  pass:'AvWUG/8d5fopPAJSUbGUmytmGziTjuyCMLURN8aUi8dK',
-  mailDefecto: 'ckuknow@gmail.com'
+  host:'172.20.1.125',
+  port:25,
+  user:'',
+  pass:'',
+  mailDefecto: 'informatica@kcl.cl'
   
   
 },
