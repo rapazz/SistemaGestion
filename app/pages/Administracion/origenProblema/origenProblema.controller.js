@@ -20,7 +20,26 @@ angular.module('kcc.controllers')
 			$scope.esgrabado = false;
 
 		}
-		$scope.GrabarDato = function() {
+    $scope.paginaValida = true;
+
+    $scope.GrabarDato = function() {
+
+
+      $scope.paginaValida = !$scope.formeditar.$error.required;
+
+      if (!$scope.paginaValida) return;
+
+
+
+
+      if ($scope.origen.EsActivo == 'true' || $scope.origen.EsActivo == 'false'){
+        $scope.origen["EsActivo"] = 0;
+
+        if ($scope.codigo.EsActivo){
+          $scope.origen["EsActivo"] = 1;
+        }
+
+      }
 			console.log($scope.origen)
 			if($scope.origen.OrigenProblemaId == null) {
 				$http.post('/api/origenproblema/crear',$scope.origen).
@@ -29,6 +48,7 @@ angular.module('kcc.controllers')
               success(function(data) {
                 $scope.id = data1;
                 $scope.codigo = data;
+                $scope.origen.EsActivo = ( $scope.origen.EsActivo == 1)
               });
 					})
 			} else {
@@ -40,7 +60,8 @@ angular.module('kcc.controllers')
             $http.get('/api/origenproblema/'+  data1).
               success(function(data) {
                 $scope.id = data1;
-                $scope.codigo = data;
+                $scope.origen = data;
+                $scope.origen.EsActivo = ( $scope.origen.EsActivo == 1)
               });
 					})
 

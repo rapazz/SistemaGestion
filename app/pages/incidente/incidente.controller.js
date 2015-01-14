@@ -6,7 +6,7 @@ function cargaform() {
 
 function BuscaRol(x,rolbuscado) {
   var roles =eval(x)
-  console.log(roles);
+
   for (var i = 0; i < roles.length; i++) {
     if (roles[i] == rolbuscado){
            return true;
@@ -37,7 +37,26 @@ angular.module('kcc.controllers'  )
 
     $scope.getCurrentUser = Auth.getCurrentUser();
 
+   $scope.EliminarArchivo = function(x,y) {
 
+      if(confirm("¿Está seguro que desea eliminar el archivo?")){
+
+        $http.post(
+          '/api/adjunto/eliminararchivo/'+ x,{usuario: $scope.getCurrentUser.email}).
+          success(function(x) {
+console.log(y);
+            $http.post(
+              '/api/adjunto/listartemporales',
+
+              {IncidenteId: y}).
+              success(function (x) {
+
+                $scope.Adjuntos = x;
+              });
+          })
+
+      }
+    }
 
     $scope.EsKeyUser = function() {
       return EsKeyUser(this);
@@ -52,7 +71,7 @@ angular.module('kcc.controllers'  )
 
     $scope.esgrabado = false;
     $scope.CerrarGrabado = function() {
-      console.log("cerro")
+     
       $scope.esgrabado = false;
 
     }
@@ -62,7 +81,7 @@ angular.module('kcc.controllers'  )
       //$files: an array of files selected, each file has name, size, and type.
       for (var i = 0; i < $files.length; i++) {
         var $file = $files[i];
-        console.log($file)
+       
         $scope.upload = $upload.upload({
           url: '/api/adjunto/subirtemporal', //upload.php script, node.js route, or servlet url
           //method: 'POST' or 'PUT',
@@ -106,13 +125,10 @@ angular.module('kcc.controllers'  )
     };
     $scope.nocargavalidacion = true;
 
-    console.log("Es keyuser "+ $scope.EsKeyUser());
-    console.log("Es consultor "+ $scope.EsConsultor());
-    console.log("Es admin "+ $scope.EsAdmin());
-
+    
     if ( $scope.nocargavalidacion){
       cargaform();
-      console.log('cargo?')
+     
       $scope.nocargavalidacion = false;
     }
 
@@ -133,7 +149,7 @@ if (!$scope.paginaValida) return;
 
      $http.post('/api/incidente/crear',$scope.incidente).
         success(function(data) {
-          console.log(data)
+        
          if ($scope.EsKeyUser())
           $location.path( "/incidente/mensajeku/"+ data );
          else
@@ -152,7 +168,7 @@ if (!$scope.paginaValida) return;
     $scope.incidente.TipoIncidenteId = "";
     $http.post('/api/incidente/nuevoid').
       success(function(data) {
-        console.log(data)
+    
         $scope.IncidenteId = data;
       });
 
@@ -289,7 +305,7 @@ if (!$scope.paginaValida) return;
 
 
       $scope.incidente.incidente["Estado"] = estado;
-      console.log($scope.incidente)
+     
       $http.post('/api/incidente/actualizar',$scope.incidente.incidente).
         success(function(data) {
           //EnviarEmail();
@@ -308,13 +324,13 @@ if (!$scope.paginaValida) return;
     $scope.getCurrentUser = Auth.getCurrentUser();
 
 
-    console.log('incidenteeditarconsultor')
+  
 
     $scope.esgrabado = false;
 
     $http.post('/api/incidente/nuevoid').
       success(function(data) {
-        console.log(data)
+     
         $scope.IncidenteIdTemp = data;
       });
 
@@ -348,7 +364,7 @@ if (!$scope.paginaValida) return;
       //$files: an array of files selected, each file has name, size, and type.
       for (var i = 0; i < $files.length; i++) {
         var $file = $files[i];
-        console.log($file)
+     
         $scope.upload = $upload.upload({
           url: '/api/adjunto/subirtemporal', //upload.php script, node.js route, or servlet url
           //method: 'POST' or 'PUT',
@@ -419,7 +435,7 @@ if (!$scope.paginaValida) return;
 
       $scope.incidente.incidente["IdInterno"] = $scope.IncidenteIdTemp;
       $scope.incidente.incidente["Estado"] = estado;
-      console.log($scope.incidente)
+     
       $http.post('/api/incidente/actualizar',$scope.incidente.incidente).
         success(function(data) {
           //EnviarEmail();
@@ -476,6 +492,7 @@ if (!$scope.paginaValida) return;
 
 $http.post('/api/incidente/editar/'+ $routeParams.id).
   success(function(data) {
+  
     $scope.incidente = data;
   })
   }
@@ -511,7 +528,7 @@ $http.post('/api/incidente/editar/'+ $routeParams.id).
         $http.post('/api/incidente/tomarincidenteusuario',$scope.incidente).
           success(function(data) {
 
-            alert('El incidente fue asignado a ' + $scope.getCurrentUser.email)
+           // alert('El incidente fue asignado a ' + $scope.getCurrentUser.email)
             $location.path( "/incidente/editarconsultor/"+ $scope.incidente.incidente.IncidenteId );
 
           });
@@ -529,18 +546,18 @@ $http.post('/api/incidente/editar/'+ $routeParams.id).
 
     cargaform();
 
-    console.log('incidenteedicion')
+
 
     $scope.esgrabado = false;
 
     $http.post('/api/incidente/nuevoid').
       success(function(data) {
-        console.log(data)
+       
         $scope.IncidenteIdTemp = data;
       });
 
     $scope.CerrarGrabado = function(x) {
-      console.log("cerro")
+  
       $scope.esgrabado = false;
     }
     $scope.EliminarArchivo = function() {
@@ -569,7 +586,7 @@ $http.post('/api/incidente/editar/'+ $routeParams.id).
       //$files: an array of files selected, each file has name, size, and type.
       for (var i = 0; i < $files.length; i++) {
         var $file = $files[i];
-        console.log($file)
+     
         $scope.upload = $upload.upload({
           url: '/api/adjunto/subirtemporal', //upload.php script, node.js route, or servlet url
           //method: 'POST' or 'PUT',
@@ -628,13 +645,13 @@ $http.post('/api/incidente/editar/'+ $routeParams.id).
     var grabar = function() {
 
       var valido = !$("#formEditarIncidente").valid()
-  console.log(valido)
+
       if (valido){
         return;
       }
 
       $scope.incidente.incidente["IdInterno"] = $scope.IncidenteIdTemp;
-      console.log($scope.incidente)
+   
       $http.post('/api/incidente/actualizar',$scope.incidente.incidente).
         success(function(data) {
           $location.path( "incidente/creado" );
@@ -647,13 +664,13 @@ $http.post('/api/incidente/editar/'+ $routeParams.id).
     var grabarCerrar = function() {
 
       var valido = !$("#formEditarIncidente").valid()
-      console.log(valido)
+   
       if (valido){
         return;
       }
 
       $scope.incidente.incidente["IdInterno"] = $scope.IncidenteIdTemp;
-      console.log($scope.incidente)
+     
       $http.post('/api/incidente/actualizar',$scope.incidente.incidente).
         success(function(data) {
           EnviarEmail();

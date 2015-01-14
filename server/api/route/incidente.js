@@ -17,6 +17,10 @@ router.post('/editar/:id', controller.show);
 
 router.post('/nuevoid', controller.nuevoid);
 
+router.get('/emailproveedorhtml/:id', controller.emailproveedorhtml);
+
+
+
 
 router.post('/tomarincidenteusuario', controller.tomarincidenteusuario);
 

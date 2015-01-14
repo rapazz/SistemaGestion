@@ -2,6 +2,7 @@
 angular.module('kcc.controllers')
 	.controller('usuariosController', ['$scope', '$route', '$animate','$http', 'elasticFactory','Auth', function($scope, $route, $animate,$http,elasticFactory,Auth) {
 	$scope.idEmail ='';
+$scope.mensajeExito = false;
 	$scope.usuarioId =0;
 	$scope.activarBoton =false;
 	$scope.arrayRoles={};
@@ -65,7 +66,7 @@ $scope.actualizarUsuario= function (){
 	$http.post('/api/usuario/update', {usuario:usuario}).
   success(function(data, status, headers, config) {
   	
-  	console.log('yesssssss')
+$scope.mensajeExito = true; 
     // this callback will be called asynchronously
     // when the response is available
   }).

@@ -12,30 +12,35 @@
           <strong>Se ha grabado con éxito</strong>
         </div>
 
-        <form enctype="multipart/form-data" class="form-horizontal ng-pristine ng-valid">
+        <form enctype="multipart/form-data" class="form-horizontal ng-pristine ng-valid" name="formeditar" id="formeditar">
             <input type="hidden" name="tipoincidente.TipoIncidenteId" ng-model="tipoincidente.TipoIncidenteId" >
-            <div class="form-group">
+            <div class="form-group" ng-show="tipoincidente.TipoIncidenteId != null">
                 <label for="" class="col-sm-2">Código</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">{{id}}</p>
                 </div>
             </div>
-            <div class="form-group">
+          <div class="form-group" ng-class="{ 'has-error' :!paginaValida && formeditar.Nombre.$error.required}" >
+            <label for="" class="col-sm-2">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control"  ng-model="tipoincidente.Nombre"  name="Nombre"  required  placeholder="Nombre"  >
+              <p ng-show="!paginaValida && formeditar.Nombre.$error.required" class="help-block">Debe ingresar el nombre del tipo de sistema</p>
+
+
+            </div>
+
+          </div>
+            <div class="form-group" ng-show="tipoincidente.TipoIncidenteId != null">
                 <label for="" class="col-sm-2">Fecha de Creación</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">{{tipoincidente.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</p>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="" class="col-sm-2">Nombre</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control"  ng-model="tipoincidente.Nombre"  name="tipoincidente.Nombre" placeholder="Nombre"  >
-                </div>
-            </div>
+
             <div class="form-group">
                 <label for="" class="col-sm-2">Es Activo?</label>
                 <div class="col-sm-10">
-                  <input type="checkbox" class="form-control"  ng-model="tipoincidente.EsActivo"  name="tipoincidente.EsActivo" ng-checked="tipoincidente.EsActivo == 1 || tipoincidente.EsActivo" />
+                  <input type="checkbox" ng-model="tipoincidente.EsActivo"  name="tipoincidente.EsActivo" ng-checked="tipoincidente.EsActivo == 1 || tipoincidente.EsActivo" />
                 </div>
             </div>
             <div class="form-group">

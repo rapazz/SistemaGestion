@@ -11,7 +11,7 @@ var seq = models.sequelize;
 exports.obtenerarchivo = function(req, res) {
 
 
-  seq.query("SELECT * FROM adjunto  where AdjuntoId = :id ",Adjunto,{raw:true},{id:req.params.id}).success(function(x) {
+  seq.query("SELECT * FROM adjunto  where  AdjuntoId = :id ",Adjunto,{raw:true},{id:req.params.id}).success(function(x) {
     var adj = x[0];
 
     var pa = "c:/nodekomatsu/archivos/"+ adj.Guid.replace('"','');
@@ -27,7 +27,7 @@ exports.obtenerarchivo = function(req, res) {
 
 exports.eliminararchivo = function(req, res) {
 
-console.log(req.body["usuario"]);
+
 
   seq.query("update adjunto set EsActivo = 0,UsuarioEliminacion = :usuario,FechaEliminacion = now()  where AdjuntoId = :id ",null,null,
     {id:req.params.id,

@@ -20,8 +20,11 @@
         <table class="table table-bordered">
             <thead>
             <tr >
+
                 <th width="16%">Número</th>
-                <th width="15%">Fecha Ingreso</th>
+              <th width="16%">Nombre</th>
+
+              <th width="15%">Fecha Ingreso</th>
               <th width="15%">Sistema</th>
               <th width="15%">Módulo</th>
               <th width="15%">Usuario KU</th>
@@ -32,19 +35,20 @@
             <tbody>
             <tr ng-repeat='order in data'>
                 <td>{{order.IncidenteId}}</td>
+                 <td>{{order.Asunto}}</td>
                 <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
 
               <td>{{order.NombreTipo}}</td>
               <td>{{order.SubNombreTipo}}</td>
 
-              <td>{{order.UsuarioIdKeyUser}}</td>
+              <td>{{order.usuarionombre}}</td>
 
               <td>
 
                  <!-- estado  != 10 or != 99 puede ver && esKU -->
-                <a class="btn btn-primary" ng-show="EsConsultor()"  href="/#/incidente/fichalectura/{{order.IncidenteId}}"><i class="glyphicon glyphicon-eye-open"></i></a>
+                <a class="btn btn-primary" ng-show="EsConsultor()"  href="/#/incidente/fichalectura/{{order.IncidenteId}}"><i class="glyphicon glyphicon-eye-open"></i></a>{{order.estado}}
                 <!--  estado  != 10 && != 99 && !esKu -->
-                <a class="btn btn-primary" ng-show="(order.Estado != 10 && order.Estado != 99  && order.Estado != 60  && order.Estado != 30) && !EsKeyUser()"  href="/#/incidente/editarconsultor/{{order.IncidenteId}}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a class="btn btn-primary" ng-show="(order.Estado != 10 && order.Estado != 99  && order.Estado != 60  && order.Estado != 30) && EsConsultor()"  href="/#/incidente/editarconsultor/{{order.IncidenteId}}"><i class="glyphicon glyphicon-edit"></i></a>
 
               </td>
             </tr>
@@ -64,6 +68,7 @@
       <thead>
       <tr >
         <th width="16%">Número</th>
+         <th width="16%">Nombre</th>
         <th width="15%">Fecha Ingreso</th>
         <th width="15%">Sistema</th>
         <th width="15%">Módulo</th>
@@ -75,12 +80,13 @@
       <tr ng-repeat='order in data2'>
 
         <td>{{order.IncidenteId}}</td>
+        <td>{{order.Asunto}}</td>
         <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
 
         <td>{{order.NombreTipo}}</td>
         <td>{{order.SubNombreTipo}}</td>
 
-        <td>{{order.UsuarioIdKeyUser}}</td>
+        <td>{{order.usuarionombre}}</td>
 
         <td>
 

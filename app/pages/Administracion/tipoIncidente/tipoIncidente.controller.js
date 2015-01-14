@@ -25,19 +25,31 @@ angular.module('kcc.controllers')
 			$scope.esgrabado = false;
 
 		}
-		$scope.GrabarDato = function() {
-			console.log($scope.tipoincidente)
+
+    $scope.paginaValida = true;
+
+
+    $scope.GrabarDato = function() {
+
+
+      $scope.paginaValida = !$scope.formeditar.$error.required;
+
+      if (!$scope.paginaValida) return;
+
+
+
+      console.log($scope.tipoincidente)
 			if($scope.tipoincidente.TipoIncidenteId == null) {
 				$http.post('/api/tipoincidente/crear',$scope.tipoincidente).
 					success(function(data) {
-						console.log(data)
+
 					})
 			} else {
 
 
 				$http.post('/api/tipoincidente/actualizar',$scope.tipoincidente).
 					success(function(data) {
-						console.log(data)
+
 					})
 
 			}

@@ -30,7 +30,8 @@ exports.listarsinasignar = function(req, res) {
   return  async.series(
     {
 
-      incidente: function (next){seq.query("SELECT * FROM incidente where UsuarioIdConsultor is null order by 1 desc", Incidente, {raw: true}
+      incidente: function (next){seq.query("SELECT *,IFNULL((select nombre from usuario u where " +
+        " u.email = i.UsuarioIdKeyUser),'') usuarionombre FROM incidente i where UsuarioIdConsultor is null order by 1 desc", Incidente, {raw: true}
         ).success(function (tipos) {
           next(null,tipos)
           //  console.log(myTableRows)
@@ -49,7 +50,7 @@ exports.listarsinasignar = function(req, res) {
       subtipo:  function(next) {
 
 
-        seq.query("SELECT * FROM subtipoincidente",SubTipoIncidente,{raw:true}).success(
+        seq.query("SELECT * FROM subtipoincidente  where EsActivo = 1",SubTipoIncidente,{raw:true}).success(
           function(x) {
             next(null, x);
           }
@@ -109,7 +110,8 @@ exports.listarmisku = function(req, res) {
   return  async.series(
     {
 
-      incidente: function (next){seq.query("SELECT * FROM incidente where UsuarioIdKeyUser = :email order by 1 desc", Incidente, {raw: true}
+      incidente: function (next){seq.query("SELECT *,IFNULL((select nombre from usuario u where " +
+        " u.email = i.UsuarioIdConsultor),'') usuarionombre FROM incidente i where UsuarioIdKeyUser = :email order by 1 desc", Incidente, {raw: true}
         , {email: req.params.id}).success(function (tipos) {
             next(null,tipos)
             //  console.log(myTableRows)
@@ -187,7 +189,8 @@ exports.listarmisconsultor = function(req, res) {
   return  async.series(
     {
 
-      incidente: function (next){seq.query("SELECT * FROM incidente  where UsuarioIdConsultor = :email order by 1 desc",Incidente,{raw:true}
+      incidente: function (next){seq.query("SELECT *, IFNULL((select nombre from usuario u where " +
+        " u.email = i.UsuarioIdKeyUser),'') usuarionombre  FROM incidente i where UsuarioIdConsultor = :email order by 1 desc",Incidente,{raw:true}
         ,{email:req.params.id}).success(function (tipos) {
           next(null,tipos)
           //  console.log(myTableRows)
@@ -206,7 +209,7 @@ exports.listarmisconsultor = function(req, res) {
       subtipo:  function(next) {
 
 
-        seq.query("SELECT * FROM subtipoincidente",SubTipoIncidente,{raw:true}).success(
+        seq.query("SELECT * FROM subtipoincidente  where EsActivo = 1",SubTipoIncidente,{raw:true}).success(
           function(x) {
             next(null, x);
           }
@@ -351,134 +354,277 @@ exports.EnvioEmail = function(req, res) {
   // return res.json(200, incidentes);
   //});
 };
+exports.emailproveedorhtml = function(req,res){
+var salida =  show(req,res);
+
+var x =     res.render('emailproveedor.html',salida);
+
+  console.log(x)
+
+}
 
 
-exports.show = function(req, res) {
+ function RetornaIncidente(id){
 
 
-  return  async.series(
 
-      {
-        incidente:function(next){
+  return   async.series(
 
-          seq.query("SELECT * FROM incidente where IncidenteId = :tipo ",Incidente,{raw:true},{tipo:req.params.id}).success(function(u) {
-            next(null, u);
-          });
-
-        },
-        historial:function(next){
-
-          seq.query("SELECT * FROM incidentehistorial where IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:req.params.id}).success(function(u) {
-            next(null, u);
-          });
-
-        },
-        adjunto:function(next){
-
-          seq.query("SELECT * FROM adjunto where IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:req.params.id}).success(function(u) {
-            next(null, u);
-          });
-
-        },
-        tipo: function(next) {
-
-          seq.query("SELECT * FROM tipoincidente where EsActivo = 1 ",TipoIncidente,{raw:true},{tipo:req.params.id}).success(function(tipos) {
-
-
-                next(null, tipos);
-              }
-          );
-
-        },
-        origen:  function(next) {
-
-
-          seq.query("SELECT * FROM origenproblema",Origen,{raw:true}).success(
-              function(x) {
-                next(null, x);
-              }
-          );
-        },
-        codigo:  function(next) {
-
-
-          seq.query("SELECT * FROM codigotermino",Codigo,{raw:true}).success(
-              function(x) {
-                next(null, x);
-              }
-          );
-        },
-        subtipo:  function(next) {
-
-
-          seq.query("SELECT * FROM subtipoincidente",Codigo,{raw:true}).success(
-              function(x) {
-                next(null, x);
-              }
-          );
-        },
-        estado:  function(next) {
-
-
-          seq.query("SELECT * FROM estado",Estado,{raw:true}).success(
-              function(x) {
-                next(null, x);
-              }
-          );
-        },
-        flujo:  function(next) {
-
-
-          seq.query("SELECT * FROM flujoestado",FlujoEstado,{raw:true}).success(
-              function(x) {
-                next(null, x);
-              }
-          );
-        },
-        keyusers:  function(next) {
-
-
-          seq.query("SELECT * FROM usuario where rolesMenu like '%40,%'",Usuario,{raw:true}).success(
-            function(x) {
-              next(null, x);
-            }
-          );
-        },
-        consultores:  function(next) {
-
-
-          seq.query("SELECT * FROM usuario where rolesMenu like '%30,%'",Usuario,{raw:true}).success(
-            function(x) {
-              next(null, x);
-            }
-          );
-        }
+    {
+      incidente:function(next){
+        var sql = "SELECT *,IFNULL((select nombre from usuario u where  u.email = i.UsuarioIdConsultor),'') usuarioconsultor " +
+          ",IFNULL((select nombre from usuario u where  u.email = i.UsuarioIdKeyUser),'') usuariokeyuser " +
+          ",(select nombre from estado e where e.EstadoId = i.Estado) estadonombre FROM incidente i where IncidenteId = :tipo ";
+        console.log(sql)
+        seq.query(sql,Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
 
       },
-      function(err, response) {
+      historial:function(next){
+
+        seq.query("SELECT *,IFNULL((select nombre from usuario u where " +
+        " u.email = i.UsuarioId),'') usuarionombre FROM incidentehistorial i where IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
+
+      },
+      adjunto:function(next){
+
+        seq.query("SELECT * FROM adjunto where EsActivo=1 and IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
+
+      },
+      tipo: function(next) {
+
+        seq.query("SELECT * FROM tipoincidente where EsActivo = 1 ",TipoIncidente,{raw:true},{tipo:id}).success(function(tipos) {
+
+
+            next(null, tipos);
+          }
+        );
+
+      },
+      origen:  function(next) {
+
+
+        seq.query("SELECT * FROM origenproblema where EsActivo = 1",Origen,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      codigo:  function(next) {
+
+
+        seq.query("SELECT * FROM codigotermino where EsActivo = 1",Codigo,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      subtipo:  function(next) {
+
+
+        seq.query("SELECT * FROM subtipoincidente where EsActivo = 1",Codigo,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      estado:  function(next) {
+
+
+        seq.query("SELECT * FROM estado",Estado,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      flujo:  function(next) {
+
+
+        seq.query("SELECT * FROM flujoestado",FlujoEstado,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      keyusers:  function(next) {
+
+
+        seq.query("SELECT * FROM usuario where rolesMenu like '%40,%'",Usuario,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      consultores:  function(next) {
+
+
+        seq.query("SELECT * FROM usuario where rolesMenu like '%30,%'",Usuario,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      }
+
+    },
+    function(err, response) {
 
 
 
 
-        var i = {};
-        i["incidente"] = response.incidente[0];
-        i["tipo"] = response.tipo;
-        i["origen"] = response.origen;
-        i["codigo"] = response.codigo;
-        i["adjunto"] = response.adjunto;
-        i["historial"] = response.historial;
-        i["subtipo"] = response.subtipo;
-        i["estado"] = response.estado;
-        i["flujo"] = response.flujo;
-        i["keyusers"] = response.keyusers;
-        i["consultores"] = response.consultores;
-        return res.json(200,i);
+      var i = {};
+      i["incidente"] = response.incidente[0];
+      i["tipo"] = response.tipo;
+      i["origen"] = response.origen;
+      i["codigo"] = response.codigo;
+      i["adjunto"] = response.adjunto;
+      i["historial"] = response.historial;
+      i["subtipo"] = response.subtipo;
+      i["estado"] = response.estado;
+      i["flujo"] = response.flujo;
+      i["keyusers"] = response.keyusers;
+      i["consultores"] = response.consultores;
+      return  res.json(200,i);
 
-      });
+    });
+
+
+
+}
+exports.show = function(req, res) {
+
+  var id = req.params.id;
+
+  return   async.series(
+
+    {
+      incidente:function(next){
+        var sql = "SELECT *,IFNULL((select nombre from usuario u where  u.email = i.UsuarioIdConsultor),'') usuarioconsultor " +
+          ",IFNULL((select nombre from usuario u where  u.email = i.UsuarioIdKeyUser),'') usuariokeyuser " +
+          ",(select nombre from estado e where e.EstadoId = i.Estado) estadonombre FROM incidente i where IncidenteId = :tipo ";
+       
+        seq.query(sql,Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
+
+      },
+      historial:function(next){
+
+        seq.query("SELECT *,IFNULL((select nombre from usuario u where " +
+        " u.email = i.UsuarioId),'') usuarionombre FROM incidentehistorial i where IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
+
+      },
+      adjunto:function(next){
+
+        seq.query("SELECT * FROM adjunto where EsActivo=1 and  IncidenteId = :tipo order by 1",Incidente,{raw:true},{tipo:id}).success(function(u) {
+          next(null, u);
+        });
+
+      },
+      tipo: function(next) {
+
+        seq.query("SELECT * FROM tipoincidente where EsActivo = 1 ",TipoIncidente,{raw:true},{tipo:id}).success(function(tipos) {
+
+
+            next(null, tipos);
+          }
+        );
+
+      },
+      origen:  function(next) {
+
+
+        seq.query("SELECT * FROM origenproblema where EsActivo = 1",Origen,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      codigo:  function(next) {
+
+
+        seq.query("SELECT * FROM codigotermino where EsActivo = 1",Codigo,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      subtipo:  function(next) {
+
+
+        seq.query("SELECT * FROM subtipoincidente where EsActivo = 1",Codigo,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      estado:  function(next) {
+
+
+        seq.query("SELECT * FROM estado",Estado,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      flujo:  function(next) {
+
+
+        seq.query("SELECT * FROM flujoestado",FlujoEstado,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      keyusers:  function(next) {
+
+
+        seq.query("SELECT * FROM usuario where rolesMenu like '%40%'",Usuario,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      },
+      consultores:  function(next) {
+
+
+        seq.query("SELECT * FROM usuario where rolesMenu like '%30%'",Usuario,{raw:true}).success(
+          function(x) {
+            next(null, x);
+          }
+        );
+      }
+
+    },
+    function(err, response) {
+
+
+
+
+      var i = {};
+      i["incidente"] = response.incidente[0];
+      i["tipo"] = response.tipo;
+      i["origen"] = response.origen;
+      i["codigo"] = response.codigo;
+      i["adjunto"] = response.adjunto;
+      i["historial"] = response.historial;
+      i["subtipo"] = response.subtipo;
+      i["estado"] = response.estado;
+      i["flujo"] = response.flujo;
+      i["keyusers"] = response.keyusers;
+      i["consultores"] = response.consultores;
+      return  res.json(200,i);
+
+    });
 
 
 };
-
 
 
 exports.actualizar = function(req, res) {
@@ -567,7 +713,8 @@ exports.tomarincidenteusuario = function(req, res) {
         FechaActualizacion: new Date(),
         UsuarioIdUltimoAsignado: usuario,
         UsuarioIdConsultor: usuario,
-        Estado: 20
+        Estado: 20,
+        EstadoGeneral: 0,
       }).success(function() {
 
         IncidenteHistorial.create({
@@ -631,7 +778,7 @@ exports.crear = function(req, res) {
       UsuarioId: usuario,
       TipoIncidenteId: inc.TipoIncidenteId,
       SubTipoIncidenteId: inc.SubTipoIncidenteId,
-      Estado: inc.Estado,
+      Estado: 10,
       OrigenProblemaId: inc.OrigenProblemaId,
       CodigoTerminoId: inc.CodigoTerminoId,
       EstadoGeneral: 1

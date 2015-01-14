@@ -172,7 +172,7 @@
     <div class="form-group">
      <label for="" class="col-sm-2 control-label">Usuario actual asignado</label>
 
-     <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.UsuarioIdUltimoAsignado}}</p>
+     <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.usuarioultimonombre}}</p>
 																		</div>
     </div>
        <div class="form-group">
@@ -210,21 +210,20 @@
      <div class="form-group">
            <label for="" class="col-sm-2  control-label">Estado General</label>
            <div class="col-sm-4">
-               <table width="190" border="0" cellspacing="0" cellpadding="0">
-                   <tbody><tr>
-                       <td><input type="radio" ng-model="incidente.incidente.EstadoGeneral" id="radio" value="1"  ></td>
-                       <td><strong>Abierto</strong></td>
-                       <td><input type="radio" ng-model="incidente.incidente.EstadoGeneral" id="radio2" value="0"></td>
-                       <td><strong>Cerrado</strong></td>
-                   </tr>
-                   </tbody></table>
+              <select ng-model="incidente.incidente.EstadoGeneral" class="form-control">
+                <option value=""></option>
+                <option value="0">Abierto</option>
+                <option value="1">Cerrado</option>
+                <option value="30">Entregar WorkAround</option>
+                <option value="40">Enviar analisis a proveedor</option>
+              </select>
            </div>
        </div>
 
 
 
-     <div class="form-group" ng-show="incidente.incidente.EstadoGeneral == 0">
-       <label for="" class="col-sm-2">Proveedor</label>
+     <div class="form-group" ng-show="incidente.incidente.EstadoGeneral == 3">
+       <label for="" class="col-sm-2">Email del Proveedor</label>
        <div class="col-sm-10 col-md-4">
          <input type="text" class="form-control" name="proveedor" ng-model="incidente.incidente.EmailProveedor" placeholder="email del proveedor">
        </div>
@@ -266,9 +265,19 @@
 
        </section>
 
+     <div class="form-group"
+          ng-show="incidente.incidente.EstadoGeneral == 1||incidente.incidente.EstadoGeneral == 0">
+       <div class="col-sm-12">
+         <div class="content-btn clearfix bg-info">
 
+           <button type="button" class="btn btn-w-md btn-gap-v btn-primary pull-right" ng-click="GrabarIncidente(incidente.incidente.Estado)">Grabar</button>
+
+         </div>
+
+       </div>
+     </div>
        <div class="form-group"
-            ng-show="incidente.incidente.Estado == 20">
+            ng-show="incidente.incidente.EstadoGeneral == 40">
            <div class="col-sm-12">
              <div class="content-btn clearfix bg-info">
 
@@ -279,7 +288,7 @@
            </div>
        </div>
      <div class="form-group"
-          ng-show="incidente.incidente.Estado == 20">
+          ng-show="incidente.incidente.EstadoGeneral == 30">
        <div class="col-sm-12">
          <div class="content-btn clearfix bg-success">
          <button type="button" class="btn btn-w-md btn-gap-v btn-success pull-right" ng-click="GrabarIncidente(30)">Entregar workaround</button>
@@ -309,7 +318,7 @@
 
        </div>
      </div>
-     <div class="form-group" ng-show="  incidente.incidente.Estado == 55" >
+     <div class="form-group" ng-show="incidente.incidente.Estado == 55" >
        <div class="col-sm-10 col-sm-offset-2">
 
          <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(60)">Entrega resultados del análisis al KU</button>
@@ -364,7 +373,7 @@
                </tr>
                <tr>
                    <th>Usuario</th>
-                   <td>{{hist.UsuarioId}} </td>
+                   <td>{{hist.usuarionombre}} </td>
                </tr>
 
 

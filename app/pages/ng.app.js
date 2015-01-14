@@ -15,7 +15,8 @@ var smartApp = angular.module('smartApp', [
   	'kcc.controllers',
   	'angularFileUpload',
   	'angularModalService',
-  	'checklist-model'
+  	'checklist-model',
+  	'chart.js'
   
   
   

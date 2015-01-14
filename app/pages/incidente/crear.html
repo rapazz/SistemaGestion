@@ -149,7 +149,7 @@
                    <tr ng-repeat="archivo in Adjuntos">
                        <td><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a></td>
                        <td>{{archivo.FechaCreacion}}</td>
-                       <td><span ng-click="EliminarArchivo(archivo.AdjuntoId)" class="glyphicon glyphicon-trash"></span></td>
+                       <td> <a ng-click="EliminarArchivo(archivo.AdjuntoId,archivo.Guid)"><span  class="glyphicon glyphicon-trash"></span></a></td>
                    </tr>
 
                    </tbody>

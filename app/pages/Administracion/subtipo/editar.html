@@ -12,30 +12,37 @@
           <strong>Se ha grabado con éxito</strong>
         </div>
 
-        <form enctype="multipart/form-data" class="form-horizontal ng-pristine ng-valid">
+        <form enctype="multipart/form-data" class="form-horizontal ng-pristine ng-valid"  name="formeditar" id="formeditar">
             <input type="hidden" name="subtipoincidente.SubTipoIncidenteId" ng-model="subtipoincidente.SubTipoIncidenteId" >
-            <div class="form-group">
+            <div class="form-group" ng-show="subtipoincidente.SubTipoIncidenteId != null">
                 <label for="" class="col-sm-2">Código</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">{{id}}</p>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-show="subtipoincidente.SubTipoIncidenteId != null">
                 <label for="" class="col-sm-2">Fecha de Creación</label>
                 <div class="col-sm-10">
                     <p class="form-control-static">{{subtipoincidente.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</p>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' :!paginaValida && formeditar.Nombre.$error.required}">
                 <label for="" class="col-sm-2">Nombre</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control"  ng-model="subtipoincidente.Nombre"  name="subtipoincidente.Nombre" placeholder="Nombre"  >
+                    <input type="text"    ng-model="subtipoincidente.Nombre"   required  name="Nombre" placeholder="Nombre"  >
+
+                  <p ng-show="!paginaValida && formeditar.Nombre.$error.required" class="help-block">Debe ingresar "el nombre del módulo"</p>
+
+
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.textooriginal.$error.required}">
                 <label for="" class="col-sm-2">Tipo</label>
                 <div class="col-sm-10">
-                    <select ng-model="subtipoincidente.TipoIncidenteId" ng-options="item.TipoIncidenteId as item.Nombre  for item in subtipoincidente.Tipos"></select>
+                    <select ng-model="subtipoincidente.TipoIncidenteId" name="" ng-options="item.TipoIncidenteId as item.Nombre  for item in subtipoincidente.Tipos"></select>
+
+                  <p ng-show="!paginaValida && formeditar.codigo.Nombre.$error.required" class="help-block">Debe seleccionar  el tipo de sistema</p>
+
 
                 </div>
             </div>
@@ -43,7 +50,7 @@
             <div class="form-group">
                 <label for="" class="col-sm-2">Es Activo?</label>
                 <div class="col-sm-10">
-                  <input type="checkbox" class="form-control"  ng-model="subtipoincidente.EsActivo"  name="subtipoincidente.EsActivo" ng-checked="subtipoincidente.EsActivo == 1" />
+                  <input type="checkbox"    ng-model="subtipoincidente.EsActivo"  name="subtipoincidente.EsActivo" ng-checked="subtipoincidente.EsActivo == 1" />
                 </div>
             </div>
             <div class="form-group">

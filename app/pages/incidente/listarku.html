@@ -21,7 +21,9 @@
             <thead>
             <tr >
                 <th width="16%">Número</th>
-                <th width="15%">Fecha Ingreso</th>
+              <th width="16%">Nombre</th>
+
+              <th width="15%">Fecha Ingreso</th>
               <th width="15%">Sistema</th>
               <th width="15%">Módulo</th>
               <th width="15%">Usuario Consultor Asignado</th>
@@ -31,11 +33,13 @@
             <tbody>
             <tr ng-repeat='order in data'>
                 <td>{{order.IncidenteId}}</td>
-                <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
+              <td>{{order.Asunto}}</td>
+
+              <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
 
               <td>{{order.NombreTipo}}</td>
               <td>{{order.SubNombreTipo}}</td>
-              <td>{{order.UsuarioIdConsultor}}</td>
+              <td>{{order.usuarionombre}}</td>
 
               <td>
 

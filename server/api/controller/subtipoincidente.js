@@ -189,7 +189,7 @@ exports.show = function(req, res) {
         tipo:  function(next) {
 
           console.log(next)
-          seq.query("SELECT * FROM tipoincidente",tipoIncidente).success(
+          seq.query("SELECT * FROM tipoincidente where EsActivo = 1 ",tipoIncidente,{raw:true}).success(
               function(x) {
                 next(null, x);
               }

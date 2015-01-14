@@ -24,12 +24,35 @@ angular.module('kcc.controllers')
 		}
 
 
+    $scope.paginaValida = true;
 		$scope.GrabarDato = function() {
-			console.log($scope.codigo)
+
+
+      $scope.paginaValida = !$scope.formeditar.$error.required;
+
+      if (!$scope.paginaValida) return;
+
+
+
+      console.log('gd0')
+      console.log($scope.codigo)
+      console.log('fgd0')
+      console.log($scope.codigo.EsActivo )
+      if ($scope.codigo.EsActivo == 'true' || $scope.codigo.EsActivo == 'false'){
+        $scope.codigo["EsActivo"] = 0;
+
+        if ($scope.codigo.EsActivo){
+          $scope.codigo["EsActivo"] = 1;
+        }
+
+      }
+      console.log('gd')
+      console.log($scope.codigo)
+      console.log('fgd')
 			if($scope.codigo.CodigoTerminoId == null) {
 				$http.post('/api/codigotermino/crear',$scope.codigo).
 					success(function(data1) {
-            console.log('ok')
+
             $http.get('/api/codigotermino/'+  data1).
               success(function(data) {
                 $scope.id = data1;
@@ -38,13 +61,18 @@ angular.module('kcc.controllers')
 					})
 			} else {
 
-
+        console.log('okA')
 				$http.post('/api/codigotermino/actualizar',$scope.codigo).
 					success(function(data1) {
+            console.log('okAD')
             $http.get('/api/codigotermino/'+  data1).
               success(function(data) {
+                console.log('okADC')
+
+                console.log(data)
                 $scope.id = data1;
                 $scope.codigo = data;
+                console.log()
               });
 					})
 
@@ -67,6 +95,7 @@ angular.module('kcc.controllers')
         success(function(data) {
           $scope.id = $routeParams.id;
           $scope.codigo = data;
+          console.log(data)
         });
 
     }

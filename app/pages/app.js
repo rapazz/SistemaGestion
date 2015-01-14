@@ -27,6 +27,8 @@
  *
  * GLOBAL: Reference DOM
  */
+ 
+ 
 	$.root_ = $('body');
 	
 	//Cambia Style por defecto
@@ -39,6 +41,8 @@
 /*
  * Calculate nav height
  */
+ 
+ var enableJarvisWidgets = true;
 var calc_navbar_height = function() {
 		var height = null;
 	
