@@ -41,7 +41,7 @@ angular.module('smartApp')
       })
       .when("/incidente/fichalectura/:id", {
         controller: "incidentelectura",
-        templateUrl: "pages/incidente/fichalectura.html"
+        templateUrl: "pages/incidente/verIncidente.html"
       })
       .when("/incidente/editarconsultor/:id", {
         controller: "incidenteeditarconsultor",

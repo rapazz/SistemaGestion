@@ -3,6 +3,8 @@ angular.module('kcc.controllers', [])
 
 $scope.habilitarMenu=false; 
 $scope.nombreUsuario = Auth.getCurrentUser().nombre;
+console.log(Auth.getCurrentUser())
+$scope.foto = Auth.getCurrentUser().foto;
 
 $scope.habilitarMenu = Auth.isLoggedIn();
 

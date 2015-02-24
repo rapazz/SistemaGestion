@@ -21,34 +21,34 @@
             <thead>
             <tr >
 
-                <th width="16%">Número</th>
-              <th width="16%">Nombre</th>
+                <th>Número</th>
+              <th >Nombre</th>
 
-              <th width="15%">Fecha Ingreso</th>
-              <th width="15%">Sistema</th>
-              <th width="15%">Módulo</th>
-              <th width="15%">Usuario KU</th>
+              <th>Fecha Ingreso</th>
+              <th >Sistema</th>
+              <th >Módulo</th>
+              <th>Usuario KU</th>
 
-              <th width="18%">Acciones</th>
+              <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat='order in data'>
-                <td>{{order.IncidenteId}}</td>
-                 <td>{{order.Asunto}}</td>
-                <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
+                <td>{{order.idIncidente}}</td>
+        <td>{{order.nombre}}</td>
+        <td>{{order.fechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
 
-              <td>{{order.NombreTipo}}</td>
-              <td>{{order.SubNombreTipo}}</td>
+        <td>{{order.tipoIncidente.Nombre}}</td>
+        <td>{{order.subtipoincidente.Nombre}}</td>
 
-              <td>{{order.usuarionombre}}</td>
+        <td>{{order.ku.nombre}}</td>
 
               <td>
 
                  <!-- estado  != 10 or != 99 puede ver && esKU -->
-                <a class="btn btn-primary" ng-show="EsConsultor()"  href="/#/incidente/fichalectura/{{order.IncidenteId}}"><i class="glyphicon glyphicon-eye-open"></i></a>{{order.estado}}
+                <a class="btn btn-primary" ng-show="EsConsultor()"  href="/#/incidente/fichalectura/{{order.idIncidente}}"><i class="glyphicon glyphicon-eye-open"></i></a>
                 <!--  estado  != 10 && != 99 && !esKu -->
-                <a class="btn btn-primary" ng-show="(order.Estado != 10 && order.Estado != 99  && order.Estado != 60  && order.Estado != 30) && EsConsultor()"  href="/#/incidente/editarconsultor/{{order.IncidenteId}}"><i class="glyphicon glyphicon-edit"></i></a>
+                <a class="btn btn-primary" ng-show="(order.idEstado != 10 && order.idEstado != 99  && order.idEstado != 60  && order.idEstado != 30) && EsConsultor()"  href="/#/incidente/editarconsultor/{{order.idIncidente}}"><i class="glyphicon glyphicon-edit"></i></a>
 
               </td>
             </tr>
@@ -67,32 +67,32 @@
     <table class="table table-bordered">
       <thead>
       <tr >
-        <th width="16%">Número</th>
-         <th width="16%">Nombre</th>
-        <th width="15%">Fecha Ingreso</th>
-        <th width="15%">Sistema</th>
-        <th width="15%">Módulo</th>
-        <th width="15%">Usuario KU</th>
-        <th width="18%">Acciones</th>
+        <th >Número</th>
+         <th>Nombre</th>
+        <th >Fecha Ingreso</th>
+        <th>Sistema</th>
+        <th >Módulo</th>
+        <th >Usuario KU</th>
+        <th >Acciones</th>
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat='order in data2'>
 
-        <td>{{order.IncidenteId}}</td>
-        <td>{{order.Asunto}}</td>
-        <td>{{order.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
+        <td>{{order.idIncidente}}</td>
+        <td>{{order.nombre}}</td>
+        <td>{{order.fechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
 
-        <td>{{order.NombreTipo}}</td>
-        <td>{{order.SubNombreTipo}}</td>
+        <td>{{order.tipoIncidente.Nombre}}</td>
+        <td>{{order.subtipoincidente.Nombre}}</td>
 
-        <td>{{order.usuarionombre}}</td>
+        <td>{{order.ku.nombre}}</td>
 
         <td>
 
           <!-- estado = 10 or 99 puede editar && esKU -->
 
-          <a class="btn btn-primary" ng-show="(order.Estado == 10) && EsConsultor()"  href="/#/incidente/tomarincidente/{{order.IncidenteId}}"><i class="glyphicon glyphicon-edit"></i></a>
+          <a class="btn btn-primary" ng-show="(order.idEstado == 10) && EsConsultor()"  href="/#/incidente/tomarincidente/{{order.idIncidente}}"><i class="glyphicon glyphicon-edit"></i></a>
 
           <!-- estado  != 10 or != 99 puede ver && esKU -->
              <!--  estado  == 10 && == 99 && !esKu -->

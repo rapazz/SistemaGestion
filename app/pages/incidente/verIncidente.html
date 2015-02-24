@@ -1,0 +1,178 @@
+<br> 
+<br>
+<div class="row">
+	<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+		<h1 class="page-title txt-color-blueDark">
+			
+			<!-- PAGE HEADER -->
+			<i class="fa fa-lg fa-fw fa-map-marker"></i> 
+				Incidente
+			<span>>  
+	Ver Incidente
+			</span>
+		</h1>
+	</div>
+</div> 
+
+	   <div class="row">
+	       
+<h1 class="text-center">Revision de Incidente N° {{incidente.idIncidente}}</h1>
+	       
+	       
+	   </div>
+<div class="row">
+<section class="panel panel-default">
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Ver Incidente</strong></div>
+  <div class="panel-body">
+
+    <form enctype="multipart/form-data" name="formEditarIncidente" id="formEditarIncidente" class="form-horizontal ng-pristine ng-valid">
+      <div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+		Nombre 
+		</div>
+		<div class="col-md-8 estilo-col">
+		{{incidente.nombre}}
+		</div>
+	</div>	 
+	    <div class="row ">
+	<div class="col-md-2 estilo-col-titulo">
+	Descripcion
+		</div>
+	<div class="col-md-8 estilo-col">
+	    {{incidente.descripcion}}
+	</div> 
+	
+</div>		
+<div class="row ">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Fecha Creacion
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.fechaCreacion}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Ultima Actualizacion
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.fechaActualizacion}}
+				 <div ng-show="incidente.fechaActualizacion == null">No Especificado</div>
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Sistema 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.tipoIncidente.Nombre}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Modulo 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.subtipoincidente.Nombre}}
+		</div>
+	</div>
+	<div class="row ">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Origen Problema 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.origenproblema.nombre}}
+			 <div ng-show="incidente.idOrigenProblema == null">No Especificado</div>
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Codigo Termino 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.codigotermino.nombre}}
+			 <div ng-show="incidente.idCodigoTermino == null">No Especificado</div>
+		</div>
+	</div>
+		<div class="row ">
+		<div class="col-md-2 estilo-col-titulo"> 
+	Key User 
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.ku.nombre}}
+		</div>
+		<div class="col-md-2 estilo-col-titulo"> 
+	Consultor
+		</div>
+		<div class="col-md-3 estilo-col">
+			{{incidente.consultor.nombre}}
+			 <div ng-show="incidente.idUsuarioConsultor == -1">No Especificado</div>
+		</div>
+	</div>
+	  <div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+		Estado 
+		</div>
+		<div class="col-md-8 estilo-col">
+		{{incidente.estado.Nombre}}
+		</div>
+	</div>
+	  <div class="row ">
+		<div class="col-md-2 estilo-col-titulo">
+		Adjuntos  
+		</div>
+		<div class="col-md-8 estilo-col">
+		<ul class="list-adjuntos" ng-repeat="archivo in incidente.adjuntos">
+            <li ><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a>, creado el {{archivo.FechaCreacion | date:'dd/MM/yyyy h:mma'}}</li>
+
+          </ul>
+          <div ng-show="incidente.adjuntos.length == 0">Sin archivos subidos</div>
+		</div>
+	</div>	 
+	
+	
+	
+	
+      <div class="col-md-12">
+        <h3>Tabla de eventos</h3>
+        <table ng-repeat="hist in incidente.historial" class="table table-bordered">
+          <tbody>
+          <tr>
+            <th width="20%">Número</th>
+            <td>{{hist.idIncidenteHistorial}}</td>
+          </tr>
+          <tr>
+            <th>Fecha</th>
+            <td>{{hist.fechaCreacion | date:'MM/dd/yyyy h:mma'}}</td>
+          </tr>
+          <tr>
+            <th>Estado</th>
+            <td>{{hist.estado.Nombre}}</td>
+          </tr>
+          <tr>
+            <th>Texto</th>
+            <td>{{hist.comentarios}}</td>
+          </tr>
+          <tr>
+            <th>Usuario</th>
+            <td>{{hist.usuario.nombre}} </td>
+          </tr>
+
+
+
+          <tr>
+            <th>Código Término</th>
+            <td>{{hist.codigotermino.Nombre}}</td>
+          </tr>
+
+
+          </tbody>
+        </table>
+
+
+      </div>
+
+
+
+
+
+    </form>
+
+
+  </div>
+</section>
+</div>

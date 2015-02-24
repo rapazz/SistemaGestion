@@ -36,7 +36,15 @@
                     <p class="form-control-static">{{tipoincidente.FechaCreacion | date:'MM/dd/yyyy h:mma'}}</p>
                 </div>
             </div>
+  <div class="form-group">
+                <label for="" class="col-sm-2">SLA</label>
+               <div class="col-sm-10">
+              <input type="text" class="form-control"  ng-model="tipoincidente.sla"  name="sla"  required  placeholder="SLA"  >
+              <p ng-show="!paginaValida && formeditar.sla.$error.required" class="help-block">Debe ingresar el  SLA</p>
 
+
+            </div>
+            </div>
             <div class="form-group">
                 <label for="" class="col-sm-2">Es Activo?</label>
                 <div class="col-sm-10">

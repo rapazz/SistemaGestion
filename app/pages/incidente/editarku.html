@@ -1,6 +1,268 @@
 
 
 
+
+<div class="row"></div>
+
+
+
+ <div class="row">
+<div class ="col-md-8">
+<div class="jarviswidget" id="wid-id-6" data-widget-editbutton="false" data-widget-custombutton="false">
+	
+
+				<!-- widget div-->
+				<div>
+					
+				
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+						
+						<form  method="post" id="form" name ="form" class="smart-form">
+							<header>
+								<h2 class="row-seperator-header"><i class="fa fa-edit"></i> Revision  del Inicidente  Número: <b>{{incidente.idIncidente}}</b> </h2>
+							</header>
+<div class="alert alert-block alert-danger" ng-show="!paginaValida">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
+          <p>
+            Se han encontrado errores o falta de información, por favor verifique
+          </p>
+        </div>
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<label class="label"><strong>Fecha Creacion</strong></label>
+										<label class="input">
+										<span>{{incidente.fechaCreacion | date:'MM/dd/yyyy h:mma'}}</span>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label class="label">SLA</label>
+										<label class="input"> 
+											<input type="number" ng-model="incidente.sla" name="sla" disabled>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label class="label">Tiempo transcurrido</label>
+										<label class="input">
+											<input type="text" ng-model="incidente.tiempoTranscurrido" name="tiempo" disabled>
+										</label>
+									</section>
+								</div>
+<div class="row">
+   
+    <section class="col col-8">
+										<label class="label">Titulo</label>
+										<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.nombre" disabled>
+										</label>
+									</section>
+    
+    
+    <section class="col col-4">
+										<label class="label">Consultor</label>
+										<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.consultor.nombre" disabled>
+										</label>
+									</section>
+</div>
+<div class="row">
+   
+    <section class="col col-6">
+										<label class="label">Sistema</label>
+											<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.tipoIncidente.Nombre" disabled>
+										</label>
+								
+    </section>
+ 
+  <section class="col col-6">
+										<label class="label">Modulo</label>
+											<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.subtipoincidente.Nombre" disabled>
+										</label>
+										
+									
+	</section>
+    
+    
+</div>
+								<section>
+									<label class="label">Descripcion</label>
+									<label class="textarea"> <i class="icon-append fa fa-comment" disabled></i> 										<textarea ng-model="incidente.descripcion" disabled rows="4" name="comment"></textarea> </label>
+								
+								</section>
+								
+								
+<div class="row">
+   
+    <section class="col col-6">
+										<label class="label">Origen Problema</label>
+											<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.origenproblema.Nombre" disabled>
+										</label>
+										
+								
+    </section>
+ 
+  <section class="col col-6">
+										<label class="label">Codigo de Termino</label>
+									<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.codigotermino.Nombre" disabled>
+										</label>
+	</section>
+    
+    
+</div>						
+
+
+<div class="row">
+   
+    <section class="col col-4">
+										<label class="label">Estado</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idEstado" name="estado"
+                                          ng-options="item.estado.EstadoId as item.estado.Nombre for item in  listas.estados" required>
+                                              <option value="">-- Seleccione Estado--</option>
+                                           </select>
+                              
+                              </label>
+<p ng-show="!paginaValida  && form.estado.$error.required" class="help-block">Debe Seleccionar el "Estado"</p>
+ </section>    
+   <section class="col col-4" ng-show="incidente.idEstado==80">
+   	<label class="label">Consultor</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idConsultor" name="consultor"
+                                          ng-options="item.usuarioId as item.nombre for item in  listas.consultor">
+                                              <option value="">-- Seleccione Consultor--</option>
+                                           </select>
+                              
+                              </label>
+   	
+   	 
+   	  </section> 
+</div> 
+
+  <section>
+									<label class="label">Comentarios Key User</label>
+									<label class="textarea"> <i class="icon-append fa fa-comment"></i> 										<textarea rows="4"  ng-model="incidente.comentarioConsultor" name="comentario"></textarea> </label>
+								
+								</section>
+
+<section>
+    	<label class="label">Estado</label>
+										<label class="input">
+    <input type="file" title="Choose File" name="archivo" ng-file-select="onFileSelect($files)"    data-ui-file-upload class="btn btn-primary">
+    </label>
+        </label>
+        
+        
+   <div class="table-responsive">
+               <table class="table table-striped table-bordered">
+                   <thead>
+                   <tr>
+                       <th>Nombre Adjunto</th>
+                       <th>Fecha</th>
+                       <th>Opciones</th>
+
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <tr ng-repeat="archivo in adjunto">
+                       <td><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a></td>
+                       <td>{{archivo.FechaCreacion}}</td>
+                       <td><span  class="glyphicon glyphicon-trash" ng-click="EliminarArchivo(archivo.AdjuntoId)"></span></td>
+                   </tr>
+
+                   </tbody>
+               </table>
+           </div>
+
+</section>
+								    
+    
+							</fieldset>
+
+							<footer>
+								<button type="button" name="Enviar" ng-click="guardar()" class="btn btn-success">
+									Guardar
+								</button>
+							
+							</footer>
+
+						
+						</form>
+						
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
+</div>
+
+<div class ="col-md-4">
+<div class="well well-sm well-light">
+			<h3>Log de Eventos
+			<br>
+			<small>Acciones asociadas al sistema</small></h3>
+		
+		<div class="panel-group smart-accordion-default" id="accordion">
+							<div class="panel panel-default"  ng-repeat="hist in incidente.historial">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#{{hist.idIncidenteHistorial}}"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{hist.fechaCreacion | date:'MM/dd/yyyy h:mma'}} Estatus: {{hist.estado.Nombre}}</a></h4>
+								</div>
+								<div id={{hist.idIncidenteHistorial}} class="panel-collapse collapse in">
+									<div class="panel-body no-padding">
+										 <table class="table table-bordered">
+					     <tr>
+					         <td><b>Usuario</b></td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.usuario.nombre}} </samp></td>
+					     </tr>
+                         <tr>
+					         <td>Codigo Termino</td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.codigotermino.Nombre}}</samp></td>
+					     </tr>
+                          <tr>
+					         <td>Comentarios</td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.comentarios}}</samp></td>
+					     </tr>
+
+					 </table>
+									</div>
+								</div>
+							</div>
+						
+		</div>
+		</div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--  --------------------------- ->
+
+
 <div class="row ng-scope">
   <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
     <h1 class="page-title txt-color-blueDark">
@@ -69,7 +331,7 @@
 
                       <div ng-repeat="item in incidente.tipo | filter: { TipoIncidenteId:  incidente.incidente.TipoIncidenteId }">{{item.Nombre}}</div>
 
-
+</span>
            </div>
        </div>
 

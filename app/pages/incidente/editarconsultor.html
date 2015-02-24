@@ -1,248 +1,174 @@
+<div class="row"></div>
 
-<style>
-  .content-btn{
-    padding: 10px;
-  }
-</style>
 
-<div class="row ng-scope">
-  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-    <h1 class="page-title txt-color-blueDark">
 
-      <!-- PAGE HEADER -->
-      <i class="fa-fw fa fa-pencil-square-o"></i>
-      Incidente
-			<span>&gt;
-			Editar Incidente
-			</span>
-    </h1>
-  </div>
+ <div class="row">
+<div class ="col-md-8">
+<div class="jarviswidget" id="wid-id-6" data-widget-editbutton="false" data-widget-custombutton="false">
+	
+
+				<!-- widget div-->
+				<div>
+					
+				
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+						
+						<form  method="post" id="form" name ="form" class="smart-form">
+							<header>
+								<h2 class="row-seperator-header"><i class="fa fa-edit"></i> Edicion del Inicidente  Número: <b>{{incidente.idIncidente}}</b> </h2>
+							</header>
+<div class="alert alert-block alert-danger" ng-show="!paginaValida">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
+          <p>
+            Se han encontrado errores o falta de información, por favor verifique
+          </p>
+        </div>
+							<fieldset>
+								<div class="row">
+									<section class="col col-4">
+										<label class="label"><strong>Fecha Creacion</strong></label>
+										<label class="input">
+										<span>{{incidente.fechaCreacion | date:'MM/dd/yyyy h:mma'}}</span>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label class="label">SLA</label>
+										<label class="input"> 
+											<input type="number" ng-model="incidente.sla" name="sla" disabled>
+										</label>
+									</section>
+									<section class="col col-4">
+										<label class="label">Tiempo transcurrido</label>
+										<label class="input">
+											<input type="text" ng-model="incidente.tiempoTranscurrido" name="tiempo" disabled>
+										</label>
+									</section>
+								</div>
+<div class="row">
+   
+    <section class="col col-8">
+										<label class="label">Titulo</label>
+										<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.nombre" disabled>
+										</label>
+									</section>
+    
+    
+    <section class="col col-4">
+										<label class="label">Key User</label>
+										<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.ku.nombre" disabled>
+										</label>
+									</section>
 </div>
-
-<div class="col-sm-12 content-btn">
-  <button type="button" onclick="window.location.href= '#/incidente/miscon'" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
-
-
+<div class="row">
+   
+    <section class="col col-6">
+										<label class="label">Sistema</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idTipoIncidente"  ng-change="cargaModulo()"    required   name="tiposistema"  ng-options="item.TipoIncidenteId as item.Nombre  for item in listas.sistema"  disabled>
+                                              <option value="">-- Seleccione Sistema --</option>
+                                           </select>
+                     
+                              </label>
+    <p ng-show="!paginaValida  && form.tiposistema.$error.required" class="help-block">Debe indicar el "Sistema"</p>
+    </section>
+ 
+  <section class="col col-6">
+										<label class="label">Modulo</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idSubTipoIncidente" name="modulo"  ng-options="item.SubTipoIncidenteId as item.Nombre  for item in listas.modulo"
+                                         >
+                                              <option value="" required>-- Seleccione Modulo --</option>
+                                           </select>
+                              
+                              </label>
+	</section>
+    
+    
 </div>
+								<section>
+									<label class="label">Descripcion</label>
+									<label class="textarea"> <i class="icon-append fa fa-comment" disabled></i> 										<textarea ng-model="incidente.descripcion" disabled rows="4" name="comment"></textarea> </label>
+								
+								</section>
+								
+								
+<div class="row">
+   
+    <section class="col col-6">
+										<label class="label">Origen Problema</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idOrigenProblema"    required   name="origenProblema"   ng-options="item.OrigenProblemaId as item.Nombre  for item in listas.origenProblema">
+                                              <option value="">-- Seleccione Origen Problema --</option>
+                                           </select>
+                     
+                              </label>
+   <p ng-show="!paginaValida  && form.origenProblema.$error.required" class="help-block">Debe indicar el "Origen del Problema"</p>
+    </section>
+ 
+  <section class="col col-6">
+										<label class="label">Codigo de Termino</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idCodigoTermino" name="codigoTermino" 
+                                          ng-options="item.CodigoTerminoId as item.Nombre for item in  listas.codigoTermino" required>
+                                              <option value="">-- Seleccione Codigo Termino --</option>
+                                           </select>
+                              
+                              </label>
+<p ng-show="!paginaValida  && form.codigoTermino.$error.required" class="help-block">Debe seleccionar  el "Codigo de Termino"</p>
+	</section>
+    
+    
+</div>						
+
 
 <div class="row">
-
-  <div class="col-md-12">
- <section class="panel panel-default">
-  <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Edición Incidente</strong></div>
-  <div class="panel-body">
-
-    <div class="alert alert-block alert-danger" ng-show="!paginaValida">
-      <a class="close" data-dismiss="alert" href="#">×</a>
-      <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
-      <p>
-        Se han encontrado errores o falta de información, por favor verifique
-      </p>
-    </div>
-
-   <form enctype="multipart/form-data" name="formEditarIncidente" id="formEditarIncidente" class="form-horizontal ng-pristine ng-valid">
-    <div class="form-group">
-     <label for="" class="col-sm-2 control-label">Nº Incidente</label>
-     <div class="col-sm-10">
-      <p class="form-control-static">{{incidente.incidente.IncidenteId}}</p>
-     </div>
-    </div>
-       <div class="form-group">
-           <label for="" class="col-sm-2 control-label">Fecha Creación</label>
-           <div class="col-sm-10">
-               <p class="form-control-static">{{incidente.incidente.FechaCreacion | date:'MM/dd/yyyy h:mma' }}</p>
-           </div>
-       </div>
-
-
-       <div class="form-group">
-           <label for="" class="col-sm-2 control-label">Estado (Interno)</label>
-           <div class="col-sm-10">
-               <p class="form-control-static">  {{incidente.incidente.Estado}}</p>
-           </div>
-       </div>
-
-     <div class="form-group" >
-       <div class="col-md-12" ng-class="{ 'has-error' :!paginaValida && formEditarIncidente.asunto.$error.required}">
-         <label for="" class="col-sm-2 control-label">Título</label>
-
-         <div class="col-sm-10">
-           <input type="text" class="form-control" ng-model="incidente.incidente.Asunto" name="asunto"  required  placeholder="Título descriptivo del problema">
-
-           <p ng-show="!paginaValida && formEditarIncidente.asunto.$invalid" class="help-block">Debe ingresar el "título del problema"</p>
-         </div>
-       </div>
-
-     </div>
-
-     <div class="form-group"  >
-       <div class="col-md-6" ng-class="{ 'has-error' :!paginaValida && formEditarIncidente.tiposistema.$error.required}">
-
-         <label for="" class="col-sm-4 control-label">Tipo de Sistema</label>
-
-         <div class="col-sm-8">
-
-
-
-           <select class="form-control" ng-model="incidente.incidente.TipoIncidenteId"    required   name="tiposistema"   ng-options="item.TipoIncidenteId as item.Nombre  for item in incidente.tipo">
-             <option value="">Seleccione un valor</option>
-
-           </select>
-
-           <p ng-show="!paginaValida  && formEditarIncidente.tiposistema.$error.required" class="help-block">Debe indicar el "Tipo del Sistema"</p>
-
-         </div>
-
-       </div>
-
-
-
-       <div  class="col col-md-6" ng-class="{ 'has-error' :!paginaValida && formEditarIncidente.modulo.$error.required}">
-
-         <label for="" class="col-sm-4 control-label">Módulo de Sistema</label>
-
-
-
-         <div class="col-sm-8"  >
-
-           <select  ng-model="incidente.incidente.SubTipoIncidenteId" name="modulo" required class="form-control"
-
-
-                    ng-options="item.SubTipoIncidenteId as item.Nombre for item in  incidente.subtipo | filter: { TipoIncidenteId:  incidente.incidente.TipoIncidenteId }:true" >
-             <option value="">Seleccione un valor</option>
-
-
-           </select>
-
-           <p ng-show="!paginaValida && formEditarIncidente.modulo.$error.required" class="help-block">Debe ingresar el "Módulo del Sistema"</p>
-         </div>
-
-
-
-       </div>
-
-     </div>
-
-     <div class="form-group" >
-       <div class="col-md-12"  ng-class="{ 'has-error' :!paginaValida && formEditarIncidente.textooriginal.$error.required}">
-
-         <label for="" class="col-sm-2 control-label">Descripción</label>
-
-         <div class="col-sm-10">
-
-           <textarea rows="3" class="form-control"  required ng-model="incidente.incidente.TextoOriginal"  name="textooriginal"     placeholder="Descripción del problema"></textarea>
-
-           <p ng-show="!paginaValida && formEditarIncidente.textooriginal.$error.required" class="help-block">Debe ingresar la "descripción del problema"</p>
-
-         </div>
-       </div>
-     </div>
-
-
-
-       <div class="form-group">
-           <label for="" class="col-sm-2 control-label">Origen del Problema</label>
-
-           <div class="col-sm-4"  ng-class="{ 'has-error' :!paginaValida && formEditarIncidente.origen.$error.required}">
-
-     <select ng-model="incidente.incidente.OrigenProblemaId" class="form-control" required name="origen" ng-options="item.OrigenProblemaId as item.Nombre  for item in incidente.origen">
-       <option value="">Seleccione un valor</option>
-     </select>
-             <p ng-show="!paginaValida && formEditarIncidente.origen.$error.required" class="help-block">Debe seleccionar el "origen del problema"</p>
-
-
-           </div>
-       </div>
-
-       <div class="form-group">
-           <label for="" class="col-sm-2 control-label">Código termino</label>
-
-           <div class="col-sm-4">
-
-     <select ng-model="incidente.incidente.CodigoTerminoId"  class="form-control" name="codigo" ng-options="item.CodigoTerminoId as item.Nombre  for item in incidente.codigo">
-       <option value="">Seleccione un valor</option>
-     </select>
-
-							 									</div>
-       </div>
-
-
-
-
-    <div class="form-group">
-     <label for="" class="col-sm-2 control-label">Usuario actual asignado</label>
-
-     <div class="col-sm-10"><p class="form-control-static">{{incidente.incidente.usuarioultimonombre}}</p>
-																		</div>
-    </div>
-       <div class="form-group">
-           <label for="" class="col-sm-2 control-label">Derivar a otro consultor</label>
-
-           <div class="col-sm-4">
-     <select ng-model="incidente.incidente.UsuarioIdConsultor" name=""
-             ng-options="item.email as item.nombre  for item in incidente.consultores"  class="form-control">
-       <option value="">Seleccione un valor</option>
-
-             </select>
-
-								 							</div>
-       </div>
-
-     <!--div class="form-group">
-       <label for="" class="col-sm-2">Derivar a otro KU</label>
-
-       <div class="col-sm-10">
-										<span class="ui-select">
-     <select ng-model="incidente.incidente.UsuarioIdKeyUser" name="" ng-options="item.email as item.nombre  for item in incidente.keyusers"></select>
-
-										</span>									</div>
-     </div!-->
-
-
-     <div class="form-group" ng-show="incidente.incidente.RespuestaKU.length > 0" >
-       <label for="" class="col-sm-2  control-label">Respuesta KeyUser</label>
-       <div class="col-sm-10">
-         <p class="form-control-static">  {{incidente.incidente.RespuestaKU}}</p>
-       </div>
-     </div>
-
-
-     <div class="form-group">
-           <label for="" class="col-sm-2  control-label">Estado General</label>
-           <div class="col-sm-4">
-              <select ng-model="incidente.incidente.EstadoGeneral" class="form-control">
-                <option value=""></option>
-                <option value="0">Abierto</option>
-                <option value="1">Cerrado</option>
-                <option value="30">Entregar WorkAround</option>
-                <option value="40">Enviar analisis a proveedor</option>
-              </select>
-           </div>
-       </div>
-
-
-
-     <div class="form-group" ng-show="incidente.incidente.EstadoGeneral == 3">
-       <label for="" class="col-sm-2">Email del Proveedor</label>
-       <div class="col-sm-10 col-md-4">
-         <input type="text" class="form-control" name="proveedor" ng-model="incidente.incidente.EmailProveedor" placeholder="email del proveedor">
-       </div>
-     </div>
-
-       <section class="panel panel-default col-sm-offset-2" ng-show="  incidente.incidente.Estado != 99">
-           <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Adjuntos</strong></div>
-           <div class="panel-body">
-               <div class="form-group">
-
-                   <div class="col-sm-2">
-                       <input type="file" title="Choose File" name="archivo" ng-file-select="onFileSelect($files)"    data-ui-file-upload class="btn btn-primary">
-                   </div>
-               </div>
-           </div>
-
-
-
-           <div class="table-responsive">
+   
+    <section class="col col-4">
+										<label class="label">Estado</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idEstado" name="estado"
+                                          ng-options="item.estado.EstadoId as item.estado.Nombre for item in  listas.estados" required>
+                                              <option value="">-- Seleccione Estado--</option>
+                                           </select>
+                              
+                              </label>
+<p ng-show="!paginaValida  && form.estado.$error.required" class="help-block">Debe Seleccionar el "Estado"</p>
+ </section>    
+   <section class="col col-4" ng-show="incidente.idEstado==80">
+   	<label class="label">Consultor</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idConsultor" name="consultor"
+                                          ng-options="item.usuarioId as item.nombre for item in  listas.consultor">
+                                              <option value="">-- Seleccione Consultor--</option>
+                                           </select>
+                              
+                              </label>
+   	
+   	 
+   	  </section> 
+</div> 
+
+  <section>
+									<label class="label">Comentarios Consultor</label>
+									<label class="textarea"> <i class="icon-append fa fa-comment"></i> 										<textarea rows="4"  ng-model="incidente.comentarioConsultor" name="comentario"></textarea> </label>
+								
+								</section>
+
+<section>
+    	<label class="label">Estado</label>
+										<label class="input">
+    <input type="file" title="Choose File" name="archivo" ng-file-select="onFileSelect($files)"    data-ui-file-upload class="btn btn-primary">
+    </label>
+        </label>
+        
+        
+   <div class="table-responsive">
                <table class="table table-striped table-bordered">
                    <thead>
                    <tr>
@@ -263,141 +189,75 @@
                </table>
            </div>
 
-       </section>
+</section>
+								    
+    
+							</fieldset>
 
-     <div class="form-group"
-          ng-show="incidente.incidente.EstadoGeneral == 1||incidente.incidente.EstadoGeneral == 0">
-       <div class="col-sm-12">
-         <div class="content-btn clearfix bg-info">
+							<footer>
+								<button type="button" name="Enviar" ng-click="guardar()" class="btn btn-success">
+									Guardar
+								</button>
+							
+							</footer>
 
-           <button type="button" class="btn btn-w-md btn-gap-v btn-primary pull-right" ng-click="GrabarIncidente(incidente.incidente.Estado)">Grabar</button>
+						
+						</form>
+						
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
+</div>
 
-         </div>
+<div class ="col-md-4">
+<div class="well well-sm well-light">
+			<h3>Log de Eventos
+			<br>
+			<small>Acciones asociadas al sistema</small></h3>
+		
+		<div class="panel-group smart-accordion-default" id="accordion">
+							<div class="panel panel-default"  ng-repeat="hist in incidente.historial">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#{{hist.idIncidenteHistorial}}"> <i class="fa fa-lg fa-angle-down pull-right"></i> <i class="fa fa-lg fa-angle-up pull-right"></i>{{hist.fechaCreacion | date:'MM/dd/yyyy h:mma'}} Estatus: {{hist.estado.Nombre}}</a></h4>
+								</div>
+								<div id={{hist.idIncidenteHistorial}} class="panel-collapse collapse in">
+									<div class="panel-body no-padding">
+										 <table class="table table-bordered">
+					     <tr>
+					         <td><b>Usuario</b></td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.usuario.nombre}} </samp></td>
+					     </tr>
+                         <tr>
+					         <td>Codigo Termino</td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.codigotermino.Nombre}}</samp></td>
+					     </tr>
+                          <tr>
+					         <td>Comentarios</td>
+					     </tr>
+					     <tr>
+					         <td><samp>{{hist.comentarios}}</samp></td>
+					     </tr>
 
-       </div>
-     </div>
-       <div class="form-group"
-            ng-show="incidente.incidente.EstadoGeneral == 40">
-           <div class="col-sm-12">
-             <div class="content-btn clearfix bg-info">
-
-             <button type="button" class="btn btn-w-md btn-gap-v btn-primary pull-right" ng-click="GrabarIncidente(40)">Enviar a análisis proveedor</button>
+					 </table>
+									</div>
+								</div>
+							</div>
+						
+		</div>
+		</div>
+</div>
 
 </div>
 
-           </div>
-       </div>
-     <div class="form-group"
-          ng-show="incidente.incidente.EstadoGeneral == 30">
-       <div class="col-sm-12">
-         <div class="content-btn clearfix bg-success">
-         <button type="button" class="btn btn-w-md btn-gap-v btn-success pull-right" ng-click="GrabarIncidente(30)">Entregar workaround</button>
-          </div>
-
-
-       </div>
-     </div>
 
 
 
-     <div class="form-group" ng-show=" incidente.incidente.Estado == 40" >
-           <div class="col-sm-10 col-sm-offset-2">
-
-               <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(50)">En análisis del proveedor</button>
-
-
-
-           </div>
-       </div>
-     <div class="form-group" ng-show="  incidente.incidente.Estado == 50" >
-       <div class="col-sm-10 col-sm-offset-2">
-
-         <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(55)">Entrega resultados del análisis</button>
-
-
-
-       </div>
-     </div>
-     <div class="form-group" ng-show="incidente.incidente.Estado == 55" >
-       <div class="col-sm-10 col-sm-offset-2">
-
-         <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(60)">Entrega resultados del análisis al KU</button>
-
-
-
-       </div>
-     </div>
-     <div class="form-group" ng-show="  incidente.incidente.Estado == 60" >
-       <div class="col-sm-10 col-sm-offset-2">
-
-         <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="GrabarIncidente(60)">Enviar informacíon a KeyUser</button>
-
-
-
-       </div>
-     </div>
-
-
-
-
-     <div class="form-group" ng-show="incidente.incidente.EstadoGeneral == 0 && incidente.incidente.Estado == 99">
-       <div class="col-sm-10 col-sm-offset-2">
-
-
-         <button type="button" class="btn btn-w-md btn-gap-v btn-success" ng-click="CerrarIncidente()">CerrarIncidente</button>
-
-
-       </div>
-     </div>
-
-
-       <div class="col-md-12">
-           <h3>Tabla de eventos</h3>
-           <table ng-repeat="hist in incidente.historial" class="table table-bordered">
-               <tbody>
-               <tr>
-                   <th width="20%">Número</th>
-                   <td>{{hist.IncidenteHistorialId}}</td>
-               </tr>
-               <tr>
-                   <th>Fecha</th>
-                   <td>{{hist.FechaEvento | date:'MM/dd/yyyy h:mma'}}</td>
-               </tr>
-               <tr>
-                   <th>Estado</th>
-                   <td><span ng-repeat="item in incidente.estado | filter:{EstadoId:hist.Estado}:true">({{item.EstadoId}}) {{item.Nombre}}</span></td>
-               </tr>
-               <tr>
-                   <th>Texto</th>
-                   <td>{{hist.Observacion}}</td>
-               </tr>
-               <tr>
-                   <th>Usuario</th>
-                   <td>{{hist.usuarionombre}} </td>
-               </tr>
-
-
-
-               <tr>
-                   <th>Código Término</th>
-                   <td><span ng-repeat="item in incidente.codigo | filter:{CodigoTerminoId:hist.CodigoTerminoId}:true">{{item.Nombre}}</span> </td>
-               </tr>
-
-
-               </tbody>
-           </table>
-
-
-       </div>
-
-
-
-
-
-   </form>
-
-
-  </div>
- </section>
-    </div>
-  </div>

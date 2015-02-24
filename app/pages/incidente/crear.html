@@ -1,124 +1,81 @@
 
 
-<style>
-  .content-btn{
-    padding: 10px;
-  }
-</style>
 
 
-<div class="row ng-scope">
-  <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
-    <h1 class="page-title txt-color-blueDark">
+ <div class="row">
+<div class ="col-md-8">
+<div class="jarviswidget" id="wid-id-6" data-widget-editbutton="false" data-widget-custombutton="false">
+	
 
-      <!-- PAGE HEADER -->
-      <i class="fa-fw fa fa-pencil-square-o"></i>
-      Incidente
-			<span>&gt;
-			Crear Incidente
-			</span>
-    </h1>
-  </div>
-</div>
-
-<div class="row ng-scope">
-  <div class="col-md-12">
-    <section class="panel panel-default">
-      <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Creación Incidente</strong></div>
-      <div class="panel-body">
-
-        <div class="alert alert-block alert-danger" ng-show="!paginaValida">
+				<!-- widget div-->
+				<div>
+					
+				
+					<!-- end widget edit box -->
+					
+					<!-- widget content -->
+					<div class="widget-body no-padding">
+						
+						<form  method="post" id="formCrearIncidente" name ="formCrearIncidente" class="smart-form">
+							<header>
+								<h2 class="row-seperator-header"><i class="fa fa-edit"></i>Nuevo Incidente </h2>
+							</header>
+ <div class="alert alert-block alert-danger" ng-show="!paginaValida">
           <a class="close" data-dismiss="alert" href="#">×</a>
           <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Errores!</h4>
           <p>
             Se han encontrado errores o falta de información, por favor verifique
           </p>
         </div>
-
-   <form enctype="multipart/form-data" name="formCrearIncidente"
-         id="formCrearIncidente" ng-submit="GrabarIncidente()"
-         class="ng-pristine ng-valid form-horizontal" novalidate="novalidate"  method="POST">
-  <fieldset>
-
-    <div class="form-group" >
-      <div class="col-md-12" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.asunto.$error.required}">
-     <label for="" class="col-sm-2 control-label">Título</label>
-
-        <div class="col-sm-10">
-              <input type="text" class="form-control" ng-model="incidente.Asunto" name="asunto"  required  placeholder="Título descriptivo del problema">
-
-          <p ng-show="!paginaValida && formCrearIncidente.asunto.$invalid" class="help-block">Debe ingresar el "título del problema"</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="form-group"  >
-      <div class="col-md-6" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.tiposistema.$error.required}">
-
-     <label for="" class="col-sm-4 control-label">Tipo de Sistema</label>
-
-        <div class="col-sm-8">
-
-
-
-       <select class="form-control" ng-model="incidente.TipoIncidenteId"    required   name="tiposistema"   ng-options="item.TipoIncidenteId as item.Nombre  for item in Tipos">
-         <option value="">Seleccione un valor</option>
-
-       </select>
-
-          <p ng-show="!paginaValida  && formCrearIncidente.tiposistema.$error.required" class="help-block">Debe indicar el "Tipo del Sistema"</p>
-
-								</div>
-
-    </div>
-
-
-
-      <div  class="col col-md-6" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.modulo.$error.required}">
-
-        <label for="" class="col-sm-4 control-label">Módulo de Sistema</label>
-
-
-
-<div class="col-sm-8"  >
-
-       <select  ng-model="incidente.SubTipoIncidenteId" name="modulo" required class="form-control"
-
-
-                ng-options="item.SubTipoIncidenteId as item.Nombre for item in SubTipos | filter: { TipoIncidenteId:  incidente.TipoIncidenteId }:true" >
-         <option value="">Seleccione un valor</option>
-
-
-       </select>
-
-  <p ng-show="!paginaValida && formCrearIncidente.modulo.$error.required" class="help-block">Debe ingresar el "Módulo del Sistema"</p>
+							<fieldset>
+						                        <div class="row">
+   
+                            <section class="col col-8">
+										<label class="label"  ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.asunto.$error.required}" >Titulo</label>
+										<label class="input">
+											<input type="text" name="nombre" ng-model="incidente.nombre" required>
+										</label>
+										 <p ng-show="!paginaValida && formCrearIncidente.nombre.$invalid" class="help-block">Debe ingresar el "Título del incidente"</p>
+									</section>
+    
+    
+ 
 </div>
-
-
-
-      </div>
-
-    </div>
-
-    <div class="form-group" >
-      <div class="col-md-12"  ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.textooriginal.$error.required}">
-
-          <label for="" class="col-sm-2 control-label">Descripción</label>
-
-        <div class="col-sm-10">
-
-          <textarea rows="3" class="form-control"  required ng-model="incidente.TextoOriginal"  name="textooriginal"     placeholder="Descripción del problema"></textarea>
-
-          <p ng-show="!paginaValida && formCrearIncidente.textooriginal.$error.required" class="help-block">Debe ingresar la "descripción del problema"</p>
-
-        </div>
-      </div>
-    </div>
-
-
-    <div class="col-md-10 col-sm-offset-2">
-      <div class="panel panel-default">
+<div class="row">
+   
+    <section class="col col-6">
+										<label class="label" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.tiposistema.$error.required}">Sistema</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idTipoIncidente"   ng-change="cargaModulo()"    required   name="tiposistema"  ng-options="item.TipoIncidenteId as item.Nombre  for item in listas.sistema">
+                                              <option value="">-- Seleccione Sistema --</option>
+                                           </select>
+                     
+                              </label>
+    <p ng-show="!paginaValida  && formCrearIncidente.tiposistema.$error.required" class="help-block">Debe indicar el "Sistema"</p>
+    </section>
+ 
+  <section class="col col-6">
+										<label class="label" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.modulo.$error.required}">Modulo</label>
+									<label class="select">
+										 <select class="input-sm" ng-model="incidente.idSubTipoIncidente" name="modulo"  ng-options="item.SubTipoIncidenteId as item.Nombre  for item in listas.modulo" required>
+                                              <option value="">-- Seleccione Modulo --</option>
+                                           </select>
+                              
+                              </label>
+<p ng-show="!paginaValida && formCrearIncidente.modulo.$error.required" class="help-block">Debe ingresar el "Módulo del Sistema"</p>
+	</section>
+    
+    
+</div>
+								<section>
+									<label class="label" ng-class="{ 'has-error' :!paginaValida && formCrearIncidente.descripcion.$error.required}">Descripcion</label>
+									<label class="textarea"> <i class="icon-append fa fa-comment"></i> 										<textarea ng-model="incidente.descripcion"  rows="4" name="descripcion" required></textarea> </label>
+								<p ng-show="!paginaValida && formCrearIncidente.descripcion.$error.required" class="help-block">Debe ingresar la "Descripción del Problema"</p>
+								</section>
+								
+						
+<section>
+          <div class="panel panel-default">
 
        <div class="panel panel-default">
            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span>Adjuntos</strong></div>
@@ -158,22 +115,45 @@
 
        </div>
 </div>
-      </div>
-    <div class="col-md-12 pull-right">
 
-      <button type="button" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
+</section>
+								    
+    
+							</fieldset>
 
-      <button type="button"   class="btn btn-primary"  ng-click="GrabarIncidente()" >Enviar</button>
+							<footer>
+								<button type="button"   class="btn  btn-success"  ng-click="GrabarIncidente()" >Enviar</button>
+							</footer>
 
-      </div>
-
-
-</fieldset>
-
-
-   </form>
-
-      </div>
-    </section>
-  </div>
+							<div class="message">
+								<i class="fa fa-check fa-lg"></i>
+								<p>
+									Your comment was successfully added!
+								</p>
+							</div>
+						</form>
+						
+					</div>
+					<!-- end widget content -->
+					
+				</div>
+				<!-- end widget div -->
+				
+			</div>
+			<!-- end widget -->
 </div>
+
+
+
+
+
+
+
+       
+
+
+  
+
+
+   
+

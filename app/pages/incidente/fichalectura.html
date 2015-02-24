@@ -1,14 +1,5 @@
 
 
-<style>
-  .content-btn{
-    padding: 10px;
-  }
-</style>
-
-
-
-
 <div class="row ng-scope">
   <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
     <h1 class="page-title txt-color-blueDark">
@@ -24,11 +15,7 @@
 </div>
 
 
-<div class="col-sm-12 content-btn">
-  <button type="button" onclick="window.history.back()" class="btn btn-w-md btn-gap-v btn-default">Volver</button>
-
-
-</div>
+<div class="row">
 <section class="panel panel-default">
   <div class="panel-heading"><strong><span class="glyphicon glyphicon-asterisk"></span> Ver Incidente</strong></div>
   <div class="panel-body">
@@ -155,7 +142,7 @@
       <div class="form-group">
         <label for="" class="col-sm-2 control-label">Adjuntos</label>
         <div class="col-sm-10">
-          <ul class="list-adjuntos" ng-repeat="archivo in incidente.adjunto">
+          <ul class="list-adjuntos" ng-repeat="archivo in incidente.incidente.adjuntos">
             <li ><a href="api/adjunto/obtenerarchivo/{{archivo.AdjuntoId}}">{{archivo.Nombre}}</a>, creado el {{archivo.FechaCreacion | date:'dd/MM/yyyy h:mma'}}</li>
 
           </ul>
@@ -222,4 +209,4 @@
 
   </div>
 </section>
-<br><br>      <br><br>      <br><br>
+</div>

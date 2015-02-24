@@ -34,10 +34,6 @@ angular.module('kcc.controllers')
 
 
 
-      console.log('gd0')
-      console.log($scope.codigo)
-      console.log('fgd0')
-      console.log($scope.codigo.EsActivo )
       if ($scope.codigo.EsActivo == 'true' || $scope.codigo.EsActivo == 'false'){
         $scope.codigo["EsActivo"] = 0;
 
@@ -46,9 +42,7 @@ angular.module('kcc.controllers')
         }
 
       }
-      console.log('gd')
-      console.log($scope.codigo)
-      console.log('fgd')
+   
 			if($scope.codigo.CodigoTerminoId == null) {
 				$http.post('/api/codigotermino/crear',$scope.codigo).
 					success(function(data1) {

@@ -29,7 +29,7 @@ $scope.cargaDepartamento= function(){
           
     $scope.validar = function (){
       
-          console.log($scope.formualario.nombreDelProyecto.$error)
+         
 var mostrarError = false 
       if ($scope.formualario.nombreDelProyecto.$error.required)
 mostrarError   = true 

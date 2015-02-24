@@ -16,7 +16,7 @@
 	<div class="row">
 		
 		<!-- NEW WIDGET START -->
-		<article class="col-xs-12 col-sm-4 col-md-4 col-lg-12">
+		<article class="col-xs-12 col-sm-4 col-md-6 col-sm-6  col-md-4 col-lg-12">
 
 
 	<!-- Widget ID (each widget will need unique ID)-->
@@ -104,15 +104,15 @@
 
 <div class="row">
     
-    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-md-6 col-sm-4 ">
 
 
 	<!-- Widget ID (each widget will need unique ID)-->
-			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-5" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
 		
 				<header>
 					<span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-					<h2 class="font-md"><strong>Proyectos </strong> <i>En Curso</i></h2>				
+					<h2 class="font-md"><strong>Proyectos </strong> <i>Por complejidad</i></h2>				
 					
 				</header>
 
@@ -124,8 +124,8 @@
 					<!-- widget content -->
 					<div class="widget-body">
 					    
-							<canvas id="doughnut" class="chart chart-doughnut" data="data"
-  labels="labels" legend="true"></canvas>
+							<canvas id="doughnut" class="chart chart-doughnut" data="data.complejidad.data"
+  labels="data.complejidad.labels" legend="true"></canvas>
   
 					</div>
 					<!-- end widget content -->
@@ -142,7 +142,7 @@
 </article>
 
     
-    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-md-6 col-sm-8 ">
 
 
 
@@ -150,7 +150,7 @@
 		
 				<header>
 					<span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-					<h2 class="font-md"><strong>Proyectos </strong> <i>En Curso</i></h2>				
+					<h2 class="font-md"><strong>Proyectos </strong> <i>Por  Tipo</i></h2>				
 					
 				</header>
 
@@ -162,8 +162,8 @@
 					<!-- widget content -->
 					<div class="widget-body">
 					    
-							<canvas id="doughnut" class="chart chart-doughnut" data="data"
-  labels="labels" legend="true"></canvas>
+							<canvas id="doughnut" class="chart chart-doughnut" data="data.tipo.data"
+  labels="data.tipo.labels" legend="true"></canvas>
   
 					</div>
 					<!-- end widget content -->
@@ -178,7 +178,7 @@
 
 
 </article>
-    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+    	<article class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-md-6 col-sm-4 ">
 
 
 
@@ -186,7 +186,7 @@
 		
 				<header>
 					<span class="widget-icon"> <i class="fa fa-arrows-v"></i> </span>
-					<h2 class="font-md"><strong>Proyectos </strong> <i>En Curso</i></h2>				
+					<h2 class="font-md"><strong>Proyectos </strong> <i>Por Empresa</i></h2>				
 					
 				</header>
 
@@ -198,8 +198,8 @@
 					<!-- widget content -->
 					<div class="widget-body">
 					    
-							<canvas id="doughnut" class="chart chart-doughnut" data="data"
-  labels="labels" legend="true"></canvas>
+							<canvas id="doughnut" class="chart chart-doughnut" data="data.empresa.data"
+  labels="data.empresa.labels" legend="true"></canvas>
   
 					</div>
 					<!-- end widget content -->
@@ -216,6 +216,107 @@
 </article>
 </div>
 
+<div class ="row">
+	
+		<!-- NEW WIDGET START -->
+		<article class="col-sm-12  col-md-2 col-sm-2 col-md-12 col-lg-6 col-md-6 col-sm-6  ">
+
+			<!-- Widget ID (each widget will need unique ID)-->
+			<div class="jarviswidget jarviswidget-color-darken" id="wid-id-2" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+				<!-- widget options:
+				usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+				data-widget-colorbutton="false"
+				data-widget-editbutton="false"
+				data-widget-togglebutton="false"
+				data-widget-deletebutton="false"
+				data-widget-fullscreenbutton="false"
+				data-widget-custombutton="false"
+				data-widget-collapsed="true"
+				data-widget-sortable="false"
+
+				-->
+				<header>
+					<span class="widget-icon"> <i class="fa fa-sitemap"></i> </span>
+					<h2>Proyectos por Jefe de Proyecto </h2>
+
+				</header>
+
+				<!-- widget div-->
+				<div>
+
+					<!-- widget edit box -->
+					<div class="jarviswidget-editbox">
+						<!-- This area used as dropdown edit box -->
+
+					</div>
+					<!-- end widget edit box -->
+
+					<!-- widget content -->
+					<div class="widget-body">
+
+						<div class="tree smart-form">
+							<ul>
+								<li>
+									<span><i class="fa fa-lg fa-folder-open"></i> Moises Bravo</span>
+									<ul>
+										<li>
+										
+													proyecto 1
+												<div class="progress left" rel="tooltip" data-original-title="25%" data-placement="top">
+													<div class="progress-bar bg-color-teal" aria-valuetransitiongoal="80"></div>
+											
+			</div>							
+										
+									  
+													proyecto 2
+												<div class="progress left" rel="tooltip" data-original-title="25%" data-placement="top">
+													<div class="progress-bar bg-color-red" aria-valuetransitiongoal="30"></div>
+											
+											
+			</div>							
+											</li>
+										</ul>	
+										
+									
+									<span><i class="fa fa-lg fa-folder-open"></i> Jorge Fernandez</span>
+									<ul>
+									
+												<li>
+										
+													proyecto 3
+												<div class="progress left" rel="tooltip" data-original-title="25%" data-placement="top">
+													<div class="progress-bar bg-color-blueDark" aria-valuetransitiongoal="15"></div>
+											
+			</div>							
+										
+									  
+													proyecto 4
+												<div class="progress left" rel="tooltip" data-original-title="25%" data-placement="top">
+													<div class="progress-bar bg-color-green" aria-valuetransitiongoal="45"></div>
+											
+											
+			</div>							
+											</li>
+									
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+					</div>
+					<!-- end widget content -->
+
+				</div>
+				<!-- end widget div -->
+
+			</div>
+			<!-- end widget -->
+
+		</article>
+		<!-- WIDGET END -->
+	
+</div>
 </section>
 
 <script type="text/javascript">
@@ -250,12 +351,39 @@
 	 */
 
 	pageSetUp();
-	
+//	pagefunction();
 	/*
 	 * PAGE RELATED SCRIPTS
 	 */
 
-	// pagefunction
-	
 
+	
+	var pagefunction = function() {
+
+	
+		
+		// Fill all progress bars with animation
+		$('.progress-bar').progressbar({
+			display_text : 'fill'
+		});
+
+
+/*! SmartAdmin - v1.4.1 - 2014-06-20 */$(document).ready(function(){$(".tree > ul").attr("role","tree").find("ul").attr("role","group"),$(".tree").find("li:has(ul)").addClass("parent_li").attr("role","treeitem").find(" > span").attr("title","Collapse this branch").on("click",function(a){var b=$(this).parent("li.parent_li").find(" > ul > li");b.is(":visible")?(b.hide("fast"),$(this).attr("title","Expand this branch").find(" > i").addClass("icon-plus-sign").removeClass("icon-minus-sign")):(b.show("fast"),$(this).attr("title","Collapse this branch").find(" > i").addClass("icon-minus-sign").removeClass("icon-plus-sign")),a.stopPropagation()})});
+	
+	};
+		 pagefunction();
+	
+	//	loadScript("bower_components/plugin/bootstrap-progressbar.min.js", pagefunction);
+/*	
+var len = $('script').filter(function () {
+    return ($(this).attr('src') == 'bower_components/plugin/bootstrap-tree.min.js');
+}).length;
+
+
+alert(len);
+
+if  (len ==0)
+loadScript("bower_components/plugin/bootstrap-tree.min.js");
+
+*/
 </script>
