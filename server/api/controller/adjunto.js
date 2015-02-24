@@ -44,6 +44,21 @@ exports.eliminararchivo = function(req, res) {
   //});
 };
 
+exports.actualizarAdjunto = function (req){
+  
+  Adjunto.update({IncidenteId:req.idIncidente},{where:{Guid:req.guid }}).then(function(affectedRows) {
+  
+  
+  console.log(affectedRows);
+  return res.send(200);
+    
+    
+  })
+  
+
+}
+
+
 exports.subirtemporal = function(req, res,next) {
 
 

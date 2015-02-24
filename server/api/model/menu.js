@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
  
   // I want updatedAt to actually be called updateTimestamp
   updatedAt: false,
-  tableName: 'menu', // this will define the table's name
+  tableName: 'menus', // this will define the table's name
   timestamps: false           // this will deactivate the timestamp columns
 }
   );

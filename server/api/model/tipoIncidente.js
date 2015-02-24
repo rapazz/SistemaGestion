@@ -7,6 +7,7 @@ module.exports = function(sequelize, DataTypes) {
     var tipoincidente = sequelize.define('tipoincidente', {
   TipoIncidenteId:  { type:DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   Nombre: DataTypes.STRING,
+  sla: DataTypes.INTEGER,
   FechaCreacion: DataTypes.DATE,
   EsActivo: DataTypes.INTEGER
   //userid:    { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },

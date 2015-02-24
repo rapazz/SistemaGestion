@@ -136,3 +136,71 @@ var url = 'http://sistemagestion-rapazz.c9.io/#/'
 
 
 };
+
+
+
+exports.envioEmailIncidente = function(tipoEmail,datos) {
+
+models.emailTemplate.find ({where:{idTemplate:tipoEmail}}).success(function(x){
+    
+
+
+
+//generaro lista de usuarios 
+// igualo campos a valores 
+
+var transport = nodemailer.createTransport(smtpTransport({
+        host: config.mailer.host,
+        port: config.mailer.port,
+
+          auth: {
+          user: config.mailer.user,
+          pass: config.mailer.pass
+        }
+      }));
+var url = 'http://sistemagestion-rapazz.c9.io/#/'
+  
+        var cuerpoEmail = x.cuerpo 
+       
+       cuerpoEmail = cuerpoEmail.replace(new RegExp('{{idIncidente}}', 'g'),datos.idIncidente);
+       cuerpoEmail = cuerpoEmail.replace(new RegExp('{{nombre}}', 'g'),datos.nombre);
+       
+       cuerpoEmail = cuerpoEmail.replace(new RegExp('{{estadoNombre}}', 'g'), datos.estado.Nombre);
+          cuerpoEmail = cuerpoEmail.replace(new RegExp('{{nombreSolicitante}}', 'g'), datos.ku.nombre);
+                    cuerpoEmail = cuerpoEmail.replace(new RegExp('{{nombreConsultor}}', 'g'), datos.consultor.nombre);
+       cuerpoEmail = cuerpoEmail.replace(new RegExp('{{aprobar}}', 'g'), url +'/niciativa/editar/' + datos.idProyecto);
+          cuerpoEmail = cuerpoEmail.replace(new RegExp('{{linkAprobacion}}', 'g'), url +'/incidente/ver' + datos.idIncidente);
+       
+     //  cuerpoEmail = cuerpoEmail.replace(new RegExp('{{guid}}', 'g'), datos.equipoProyecto[i].guid);   
+       
+   
+     var salida = {
+        from: config.mailer.mailDefecto,
+        to:  datos.ku.email,
+       // to:  'moises.bravo@rapazz.cl',
+        subject: x.asunto  + ' ' +datos.idIncidente,
+        html: cuerpoEmail
+      }
+      
+      transport.sendMail(salida, function(error, response){  //callback
+        if(error){
+          console.log(error);
+        }else{
+          console.log("Message sent: " + response.message);
+        }
+
+     
+      });
+   
+   //  smtpTransport.close(); // shut down the connection pool, no more messages.  Comment this line out to continue sending emails.
+   
+   
+   
+    
+    
+    
+})
+
+
+
+};

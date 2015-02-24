@@ -24,6 +24,10 @@ var uid = require("node-uuid");
 
 var multer  = require('multer')
 
+
+
+
+
 exports.listarsinasignar = function(req, res) {
 
 
@@ -104,6 +108,8 @@ exports.listarsinasignar = function(req, res) {
 
 
 // Get list of incidentes
+
+
 exports.listarmisku = function(req, res) {
 
 

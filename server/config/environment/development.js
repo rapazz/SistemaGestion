@@ -8,6 +8,11 @@ module.exports = {
     GOOGLE_SECRET: 'l9yeymvFoR97DGipcCLxGix2',
     DOMAIN: 'http://gestionkcc-rapazz.c9.io:80'
   },
+   elasticsearch:{
+    host:'54.187.191.158',
+    index:'contactos',
+    type:'kcc'
+  },
   mysql: {
     dialect:'mysql',
     port: 3306,

@@ -11,7 +11,9 @@ module.exports = function(sequelize, DataTypes) {
   fechaActualizacion: DataTypes.DATE,
   fechaUltimoLogin: DataTypes.DATE,
       rolesMenu: DataTypes.STRING,
-  estado: DataTypes.INTEGER
+  estado: DataTypes.INTEGER,
+  idEmpresa:DataTypes.INTEGER,
+  foto:DataTypes.STRING
 
   },
   {

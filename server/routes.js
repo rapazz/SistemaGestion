@@ -22,6 +22,7 @@ app.use('/api/proyecto', require('./api/route/proyecto'));
  
  
   app.use('/api/incidente', require('./api/route/incidente'));
+  app.use('/api/incidente2', require('./api/route/incidente2'));
   app.use('/api/adjunto', require('./api/route/adjunto'));
   app.use('/api/proyectoAdjunto', require('./api/route/proyectoAdjunto'));
   

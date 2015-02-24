@@ -12,6 +12,7 @@ var sequelize = new Sequelize(config.mysql.database, config.mysql.user, config.m
       port:    config.mysql.port, // or 5432 (for postgres)
     host: config.mysql.host,
   define: {
+   freezeTableName:true,
         timestamps: false,
     }
 

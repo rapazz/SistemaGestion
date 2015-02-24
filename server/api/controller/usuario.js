@@ -28,7 +28,7 @@ exports.getMenu = function(req, res) {
 
 
      roles = JSON.parse(usuario.rolesMenu);
-    console.log(roles);
+    
   models.Menu.findAll({attributes: ['menuId','Nombre', 'url','estilo','idPadre'] ,include: [ {model: models.rolMenus, as: models.rolMenus.tableName}],where:{"rolMenus.rolId":roles}
 
 
@@ -60,15 +60,13 @@ exports.getMenu = function(req, res) {
       aux.subMenu.push(userMenu[j]);
        cabeceraMenu[x]= aux;
 
-      if (userMenu[j].idPadre==30) {
-        console.log(j);
-       console.log(userMenu[j].url);}
+     
      }
 
      }
   }
 
-    console.log(cabeceraMenu)
+   
    return res.json(200, cabeceraMenu);
 
   });

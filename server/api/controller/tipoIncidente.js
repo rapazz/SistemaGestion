@@ -49,9 +49,10 @@ exports.actualizar = function(req, res) {
     if (t) { // if the record exists in the db
       t.updateAttributes({
         Nombre: tipo.Nombre,
+         sla: tipo.sla,
         EsActivo: tipo.EsActivo
       }).success(function() {
-        console.log('ok')
+       
         return res.json(201, 1);
       });
     }
@@ -65,10 +66,11 @@ exports.crear = function(req, res) {
   var tipo = req.body;
   tipoIncidente.create({
     Nombre: tipo.Nombre,
+    sla: tipo.sla,
     EsActivo: tipo.EsActivo,
     FechaCreacion: new Date()
   }).success(function(x) {
-        console.log(x.TipoIncidenteId)
+      
         return res.json(201, x.TipoIncidenteId);
       });
 

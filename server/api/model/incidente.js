@@ -28,7 +28,10 @@ module.exports = function(sequelize, DataTypes) {
     RespuestaKU: DataTypes.STRING,
 
     //userid:    { type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true },
-  }, {
+  },
+  
+  
+  {
     tableName: 'incidente', // this will define the table's name
     timestamps: false           // this will deactivate the timestamp columns
   });

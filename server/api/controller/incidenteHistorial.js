@@ -1,17 +1,16 @@
-
 var models  = require('../model');
 var express = require('express');
 
 
 exports.insertarHistorial = function(req) {
   
-  models.historialProyecto.create({
-      idProyecto:req.idProyecto,
+  models.incidenteHistorial.create({
+      idIncidente:req.idIncidente,
       fechaCreacion: new Date(),
-      idEstadoProyecto:req.idEstadoProyecto,
-      idEtapaProyecto:req.idEtapaProyecto,
-      idUsuario: req.usuarioId,
-      descripcion:req.descripcion
+      idEstado:req.idEstado,
+      idCodigoTermino:req.idCodigoTermino,
+     usuarioId : req.usuarioId,
+      comentarios:req.descripcion
       
 }).success(function(historial) {
    
@@ -21,6 +20,7 @@ exports.insertarHistorial = function(req) {
   
   
 }
+
 
 
 exports.index = function(req, res) {

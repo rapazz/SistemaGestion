@@ -7,7 +7,8 @@ module.exports = function(sequelize, DataTypes) {
     CodigoTerminoId: {type: DataTypes.INTEGER, primaryKey: true , autoIncrement: true},
    Nombre: DataTypes.STRING,
     FechaCreacion: DataTypes.DATE,
-    EsActivo: DataTypes.INTEGER
+    EsActivo: DataTypes.INTEGER,
+    derivar:DataTypes.INTEGER
   },
  {
    createdAt: false,
