@@ -7,7 +7,7 @@ var router = express.Router();
 var multer  = require('multer');
 
 
-router.post('/subirtemporal',[ multer({ dest: 'c:/nodekomatsu/archivos'}), controller.subirtemporal]);
+router.post('/subirtemporal',[ multer({ dest: config.rutaAdjunto.url}), controller.subirtemporal]);
 router.get('/listar', controller.listar);
 
 router.post('/actualizaincidente', controller.actualizaincidente);

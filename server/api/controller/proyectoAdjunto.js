@@ -1,7 +1,7 @@
 var models  = require('../model');
 var express = require('express');
 var _ = require('lodash');
-
+var config = require('../../config/environment');
 
 
 // Get list of incidentes
@@ -10,7 +10,7 @@ exports.obtenerarchivo = function(req, res) {
 
  
 
-  res.download('archivos/'+ req.params.id) ;
+  res.download(config.rutaAdjunto.url +'/'+ req.params.id) ;
 
   
  

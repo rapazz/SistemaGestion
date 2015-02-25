@@ -17,8 +17,8 @@ exports.incidentesKU = function(req, res) {
   {model:models.subtipoincidente, as:'subtipoincidente' },
   {model:models.origenproblema, as:'origenproblema' },
   {model:models.estado, as:'estado' },
-  {model:models.codigotermino, as:'codigotermino' }]
-    
+  {model:models.codigotermino, as:'codigotermino' }],
+     order: '`idIncidente` DESC'
   }).success(function(proyecto) {
    
    return res.json(200, proyecto);

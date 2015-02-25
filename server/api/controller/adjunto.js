@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var models  = require('../model');
 var express = require('express');
+var config = require('../../config/environment');
 var Adjunto = models.adjunto;
 var seq = models.sequelize;
 
@@ -14,7 +15,7 @@ exports.obtenerarchivo = function(req, res) {
   seq.query("SELECT * FROM adjunto  where  AdjuntoId = :id ",Adjunto,{raw:true},{id:req.params.id}).success(function(x) {
     var adj = x[0];
 
-    var pa = "c:/nodekomatsu/archivos/"+ adj.Guid.replace('"','');
+    var pa = config.rutaAdjunto.url +"/"+ adj.Guid.replace('"','');
 
      res.download(adj.UrlArchivo,adj.Nombre) ;
 
