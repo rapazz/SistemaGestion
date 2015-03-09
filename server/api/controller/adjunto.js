@@ -89,6 +89,36 @@ exports.subirtemporal = function(req, res,next) {
    // return res.json(200, incidentes);
   //});
 };
+
+exports.subir = function(req, res,next) {
+
+
+
+  var idincidente = req.body["IncidenteId"];
+
+  var archivo = req.files["file"];
+
+  Adjunto.create({
+    Nombre: archivo.originalname,
+    Guid: idincidente,
+    EsActivo: 1,
+    FechaCreacion: new Date(),
+    UrlArchivo: archivo.path,
+    IncidenteId: idincidente,
+    HistorialId: 0
+
+  }).success(function(x) {
+
+
+      return res.send(200);
+
+
+  });
+ // Incidente.find(function (err, incidentes) {
+   // if(err) { return handleError(res, err); }
+   // return res.json(200, incidentes);
+  //});
+};
 exports.actualizaincidente = function(req, res) {
 
   seq.query("update adjunto set IncidenteId = :id where Guid = :guid ",null,{raw:false},{tipo:req.idincidente,guid:req.guid}).success(function(tipos) {
@@ -116,6 +146,23 @@ exports.listartemporales = function(req, res,next) {
 
 
 };
+
+exports.listarAdjuntos = function(req, res,next) {
+
+
+
+
+  var idincidente = req.body["IncidenteId"];
+
+  seq.query("SELECT * FROM adjunto where IncidenteId = :tipo and EsActivo = 1 ",Adjunto,{raw:false},{tipo:idincidente}).success(function(adj) {
+    return res.send( adj);
+    //  console.log(myTableRows)
+  });
+
+
+
+};
+
 
 exports.listar = function(req, res) {
 

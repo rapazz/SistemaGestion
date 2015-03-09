@@ -252,8 +252,8 @@ if (!$scope.paginaValida) return;
     if ($scope.EsConsultor()){
       $http.get('/api/incidente2/listarSinAsignar').
         success(function(data2) {
-          console.log(data2)
           $scope.data2 = data2;
+        
         });
 
     }
@@ -319,6 +319,10 @@ $scope.paginaValida=true;
 $http.get('/api/listas/incidente/estadosPermitidos/'+$scope.incidente.idEstado ).success(function(listasistema) {
       $scope.listas.estados  = listasistema;
     });
+  
+  
+  
+  
    
    
   })
@@ -399,6 +403,9 @@ $http.get('/api/incidente2/'+ $routeParams.id).
   success(function(data) {
   
     $scope.incidente = data;
+      $scope.adjunto  = data.adjuntos
+    
+        $scope.IncidenteIdTemp  =data.idIncidente;
     $scope.cargaModulo();
    
 
@@ -413,7 +420,66 @@ $http.get('/api/listas/incidente/estadosPermitidos/'+$scope.incidente.idEstado )
   })
   
 
+ $scope.EliminarArchivo = function(x) {
 
+      if(confirm("¿Está seguro que desea eliminar el archivo?")){
+
+        $http.post(
+          '/api/adjunto/eliminararchivo/'+ x).
+          success(function(x) {
+
+            $http.post(
+              '/api/adjunto/listarAdjuntos',
+
+              {IncidenteId: $scope.IncidenteIdTemp}).
+              success(function (y) {
+
+                $scope.adjunto = y;
+              });
+          })
+
+      }
+    }
+    $scope.onFileSelect = function($files) {
+console.log( $scope.IncidenteIdTemp);
+      //$files: an array of files selected, each file has name, size, and type.
+      for (var i = 0; i < $files.length; i++) {
+        var $file = $files[i];
+       console.log($scope.IncidenteIdTemp)
+        $scope.upload = $upload.upload({
+          url: '/api/adjunto/subir', //upload.php script, node.js route, or servlet url
+          //method: 'POST' or 'PUT',
+          //headers: {'header-key': 'header-value'},
+          //withCredentials: true,
+          method: "POST",
+          data: {IncidenteId: $scope.IncidenteIdTemp},
+          file: $file // or list of files ($files) for html5 only
+          //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
+          //	fileFormDataName: "myFile"
+          // customize file formData name ('Content-Disposition'), server side file variable name.
+          //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
+          // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+          //formDataAppender: function(formData, key, val){}
+        }).progress(function(evt) {
+          console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+        }).success(function(data, status, headers, config) {
+          // file is uploaded successfully
+          console.log('archivosubido '+ data)
+          console.log('id  '+ $scope.IncidenteId)
+
+          $http.post(
+            '/api/adjunto/listarAdjuntos',
+
+            {IncidenteId: $scope.IncidenteIdTemp}).
+            success(function(x) {
+              alert('El archivo fue subido con éxito')
+              $scope.adjunto = x;
+            });
+        });
+   
+      }
+  
+    };
 
 $scope.guardar =  function(){
   
