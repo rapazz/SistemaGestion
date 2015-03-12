@@ -24,8 +24,11 @@ module.exports = function(sequelize, DataTypes) {
     
       get: function () {
         //falta implementar diferencias para el calculo del SLA  
+        
           var now = moment(this.fechaCierre);
-
+if (moment(this.fechaCierre)<0)
+now = moment(Date.now());
+console.log(Math.round(now.diff(this.fechaCreacion, 'hours', true)));
 
  return Math.round(now.diff(this.fechaCreacion, 'hours', true));
       
